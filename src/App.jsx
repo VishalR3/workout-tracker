@@ -6,6 +6,7 @@ import Exercises from "./pages/exercises/Exercises";
 import Workouts from "./pages/workouts/Workouts";
 import { ThemeProvider } from "@mui/material";
 import theme from "./theme/theme";
+import Results from "./pages/results/Results";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/results",
-        element: <div>Results</div>,
+        element: <Results />,
       },
       {
         path: "/calendar",
