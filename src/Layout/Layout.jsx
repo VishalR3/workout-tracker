@@ -58,31 +58,31 @@ const Layout = () => {
         >
           <BottomNavigationAction
             to="/exercises"
-            label="Exercises"
+            // label="Exercises"
             icon={<SportsGymnastics />}
             LinkComponent={Link}
           />
           <BottomNavigationAction
             to="/workouts"
-            label="Workouts"
+            // label="Workouts"
             icon={<FitnessCenter />}
             LinkComponent={Link}
           />
           <BottomNavigationAction
             to="/results"
-            label="Results"
+            // label="Results"
             icon={<Timeline />}
             LinkComponent={Link}
           />
           <BottomNavigationAction
             to="/calendar"
-            label="Calendar"
+            // label="Calendar"
             icon={<CalendarMonth />}
             LinkComponent={Link}
           />
           <BottomNavigationAction
             to="/options"
-            label="Options"
+            // label="Options"
             icon={<Menu />}
             LinkComponent={Link}
           />

@@ -1,6 +1,8 @@
 import { Grid, Typography } from "@mui/material";
 import CurveGraph from "../../components/results/CurveGraph";
 import Stats from "../../components/results/Stats";
+import BarGraph from "../../components/results/BarGraph";
+import Section from "../../components/options/Section";
 
 const Results = () => {
   return (
@@ -17,7 +19,7 @@ const Results = () => {
       <Grid item xs={12}>
         <Typography variant="h3">Frequency</Typography>
         <Grid container mt={2}>
-          <CurveGraph />
+          <BarGraph />
         </Grid>
       </Grid>
       <Grid item xs={12}>
@@ -64,8 +66,8 @@ const Results = () => {
       </Grid>
       <Grid item xs={12}>
         <Typography variant="h3">Last Workout</Typography>
-        <Grid container mt={2}>
-          <CurveGraph />
+        <Grid container my={2}>
+          <Section height="250px" />
         </Grid>
       </Grid>
     </Grid>

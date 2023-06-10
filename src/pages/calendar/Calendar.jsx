@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import CurveGraph from "../../components/results/CurveGraph";
+import Section from "../../components/options/Section";
 
 const Calendar = () => {
   return (
@@ -9,15 +9,15 @@ const Calendar = () => {
       </Grid>
       <Grid item xs={12}>
         <Grid container>
-          <CurveGraph height="350px" />
+          <Section height="350px" />
         </Grid>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="h3">Workout History</Typography>
-        <Grid container gap={2} mt={2}>
-          <CurveGraph height="120px" />
-          <CurveGraph height="120px" />
-          <CurveGraph height="120px" />
+        <Grid container gap={2} my={2}>
+          <Section height="120px" />
+          <Section height="120px" />
+          <Section height="120px" />
         </Grid>
       </Grid>
     </Grid>

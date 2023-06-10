@@ -1,4 +1,4 @@
-import { Grid, List, Typography } from "@mui/material";
+import { Chip, Grid, List, Typography } from "@mui/material";
 import MockExercise from "../../components/exercises/MockExercise";
 import ExerciseListItem from "../../components/exercises/ExerciseListItem";
 import CurrentWorkout from "../../components/workouts/CurrentWorkout";
@@ -36,9 +36,9 @@ const Workouts = () => {
 
       <Grid item xs={12}>
         <Grid container flexDirection={"column"} gap={1}>
-          <Grid container justifyContent="space-between">
+          <Grid container justifyContent="space-between" alignItems={"center"}>
             <Typography variant="h3">Workouts</Typography>
-            <Typography variant="subtitle1">Show All</Typography>
+            <Chip size="small" label="Add Workout" sx={{ px: 1 }} />
           </Grid>
           <List disablePadding>
             {workouts.map((workout, index) => (

@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import CurveGraph from "../../components/results/CurveGraph";
+import Section from "../../components/options/Section";
 
 const Options = () => {
   return (
@@ -10,20 +10,20 @@ const Options = () => {
       <Grid item xs={12}>
         <Typography variant="h3">Your Settings</Typography>
         <Grid container mt={2}>
-          <CurveGraph />
+          <Section />
         </Grid>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="h3">App Settings</Typography>
         <Grid container mt={2}>
-          <CurveGraph height="300px" />
+          <Section height="300px" />
         </Grid>
       </Grid>
 
       <Grid item xs={12}>
         <Typography variant="h3">Legal</Typography>
-        <Grid container mt={2}>
-          <CurveGraph height="80px" />
+        <Grid container my={2}>
+          <Section height="80px" />
         </Grid>
       </Grid>
     </Grid>
