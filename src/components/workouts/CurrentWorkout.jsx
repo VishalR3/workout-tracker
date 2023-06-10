@@ -83,7 +83,7 @@ const CurrentWorkout = () => {
             {workout.streak} Weeks Streak
           </Typography>
         </Grid>
-        <Grid container mb={3}>
+        <Grid container mb={3} flexDirection={"column"}>
           <Typography variant="body1" mb={1}>
             {workout.section.title}
           </Typography>
