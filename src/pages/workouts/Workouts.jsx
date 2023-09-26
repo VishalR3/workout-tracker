@@ -2,8 +2,10 @@ import { Chip, Grid, List, Typography } from "@mui/material";
 import MockExercise from "../../components/exercises/MockExercise";
 import ExerciseListItem from "../../components/exercises/ExerciseListItem";
 import CurrentWorkout from "../../components/workouts/CurrentWorkout";
+import { useNavigate } from "react-router-dom";
 
 const Workouts = () => {
+  const navigate = useNavigate();
   const workouts = ["Push Pull Legs", "Upper Lower", "Full Body", "Bro Split"];
   return (
     <Grid container spacing={3} p={2}>
@@ -38,7 +40,7 @@ const Workouts = () => {
         <Grid container flexDirection={"column"} gap={1}>
           <Grid container justifyContent="space-between" alignItems={"center"}>
             <Typography variant="h3">Workouts</Typography>
-            <Chip size="small" label="Add Workout" sx={{ px: 1 }} />
+            <Chip size="small" label="Add Workout" sx={{ px: 1 }} onClick={()=>navigate("/add/workout")} />
           </Grid>
           <List disablePadding>
             {workouts.map((workout, index) => (

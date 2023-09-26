@@ -6,25 +6,15 @@ import {
   Timeline,
 } from "@mui/icons-material";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import { useEffect, useLayoutEffect, useState } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import {useLayoutEffect, useState } from "react";
+import { Link, Outlet, useLocation,  } from "react-router-dom";
 
 const Layout = () => {
   const [value, setValue] = useState(0);
   const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (location.pathname === "/") {
-      navigate("/exercises");
-    }
-  }, [location, navigate]);
 
   useLayoutEffect(() => {
     switch (location.pathname) {
-      case "/exercises":
-        setValue(0);
-        break;
       case "/workouts":
         setValue(1);
         break;
@@ -57,7 +47,7 @@ const Layout = () => {
           }}
         >
           <BottomNavigationAction
-            to="/exercises"
+            to="/"
             // label="Exercises"
             icon={<SportsGymnastics />}
             LinkComponent={Link}

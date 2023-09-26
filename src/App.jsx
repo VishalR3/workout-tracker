@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { workerContext } from "./workerContext";
 import Layout from "./Layout/Layout";
 import Exercises from "./pages/exercises/Exercises";
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/exercises",
+        path: "/",
         element: <Exercises />,
       },
       {
