@@ -11,6 +11,7 @@ import Options from "./pages/options/Options";
 import Calendar from "./pages/calendar/Calendar";
 import Muscle from "./pages/muscle/Muscle";
 import AddWorkout from "./pages/addworkout/AddWorkout";
+import Workout from "./pages/workout/Workout";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +45,11 @@ const router = createBrowserRouter([
       {
         path: "/add/workout",
         element: <AddWorkout />,
-      }
+      },
+      {
+        path: "/workout/:id",
+        element: <Workout />,
+      },
     ],
   },
 ]);

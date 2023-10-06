@@ -12,9 +12,9 @@ const WorkoutListItem = ({ workout }) => {
         mb: "6px",
         cursor: 'pointer',
       }}
-      onClick={() => navigate(`/workout/${workout}`)}
+      onClick={() => navigate(`/workout/${workout.id}`)}
     >
-      <ListItemText primary={workout} />
+      <ListItemText primary={workout.name} secondary={workout?.description} />
       <ListItemIcon sx={{ justifyContent: "flex-end" }}>
         <NavigateNext color="primary" />
       </ListItemIcon>

@@ -47,7 +47,7 @@ const Workouts = () => {
           </Grid>
           <List disablePadding>
             {workouts?.map((workout, index) => (
-              <WorkoutListItem workout={workout.name} key={index} />
+              <WorkoutListItem workout={workout} key={index} />
             ))}
           </List>
         </Grid>
