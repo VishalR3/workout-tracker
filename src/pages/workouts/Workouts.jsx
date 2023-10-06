@@ -1,12 +1,15 @@
 import { Chip, Grid, List, Typography } from "@mui/material";
 import MockExercise from "../../components/exercises/MockExercise";
-import ExerciseListItem from "../../components/exercises/ExerciseListItem";
 import CurrentWorkout from "../../components/workouts/CurrentWorkout";
+import WorkoutListItem from "../../components/workouts/WorkoutListItem";
 import { useNavigate } from "react-router-dom";
+import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "../../db/db";
 
 const Workouts = () => {
   const navigate = useNavigate();
-  const workouts = ["Push Pull Legs", "Upper Lower", "Full Body", "Bro Split"];
+  // const workouts = ["Push Pull Legs", "Upper Lower", "Full Body", "Bro Split"];
+  const workouts = useLiveQuery(() => db.workouts.toArray());
   return (
     <Grid container spacing={3} p={2}>
       <Grid item xs={12}>
@@ -40,11 +43,11 @@ const Workouts = () => {
         <Grid container flexDirection={"column"} gap={1}>
           <Grid container justifyContent="space-between" alignItems={"center"}>
             <Typography variant="h3">Workouts</Typography>
-            <Chip size="small" label="Add Workout" sx={{ px: 1 }} onClick={()=>navigate("/add/workout")} />
+            <Chip size="small" label="Add Workout" sx={{ px: 1 }} onClick={() => navigate("/add/workout")} />
           </Grid>
           <List disablePadding>
-            {workouts.map((workout, index) => (
-              <ExerciseListItem exercise={workout} key={index} />
+            {workouts?.map((workout, index) => (
+              <WorkoutListItem workout={workout.name} key={index} />
             ))}
           </List>
         </Grid>

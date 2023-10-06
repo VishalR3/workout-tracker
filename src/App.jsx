@@ -10,6 +10,7 @@ import Results from "./pages/results/Results";
 import Options from "./pages/options/Options";
 import Calendar from "./pages/calendar/Calendar";
 import Muscle from "./pages/muscle/Muscle";
+import AddWorkout from "./pages/addworkout/AddWorkout";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/muscle/:name",
         element: <Muscle />,
+      },
+      {
+        path: "/add/workout",
+        element: <AddWorkout />,
       }
     ],
   },
