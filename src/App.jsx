@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { workerContext } from "./workerContext";
 import Layout from "./Layout/Layout";
 import Exercises from "./pages/exercises/Exercises";
@@ -9,6 +9,7 @@ import theme from "./theme/theme";
 import Results from "./pages/results/Results";
 import Options from "./pages/options/Options";
 import Calendar from "./pages/calendar/Calendar";
+import Muscle from "./pages/muscle/Muscle";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
         path: "/options",
         element: <Options />,
       },
+      {
+        path: "/muscle/:name",
+        element: <Muscle />,
+      }
     ],
   },
 ]);
