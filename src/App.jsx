@@ -12,6 +12,7 @@ import Calendar from "./pages/calendar/Calendar";
 import Muscle from "./pages/muscle/Muscle";
 import AddWorkout from "./pages/addworkout/AddWorkout";
 import Workout from "./pages/workout/Workout";
+import EditWorkout from "./pages/editWorkout/EditWorkout";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/workout/:id",
         element: <Workout />,
+      },
+      {
+        path: "/edit/workout/:id",
+        element: <EditWorkout />,
       },
     ],
   },
