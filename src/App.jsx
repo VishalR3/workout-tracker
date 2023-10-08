@@ -13,6 +13,8 @@ import Workout from "./pages/workout/Workout";
 import EditWorkout from "./pages/editWorkout/EditWorkout";
 import WorkoutSection from "./pages/workout/section/WorkoutSection";
 import EditWorkoutSection from "./pages/workout/section/edit/EditWorkoutSection";
+import { useEffect } from "react";
+import { defaultConfig } from "./assets/config";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +70,19 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const ls = window.localStorage;
+  const checkConfigExists = () => {
+    if (ls.getItem("currentWorkout")) return true;
+    return false;
+  };
+  const storeConfig = () => {
+    if (!checkConfigExists()) {
+      ls.setItem("currentWorkout", defaultConfig.currentWorkout);
+    }
+  };
+  useEffect(() => {
+    storeConfig();
+  }, []);
   return (
     <>
       <ThemeProvider theme={theme}>

@@ -3,13 +3,26 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../../db/db";
 import WorkoutSectionListItem from "../../components/workout/WorkoutSectionListItem";
-import { Favorite } from "@mui/icons-material";
+import { Check, Favorite } from "@mui/icons-material";
+import { useCallback } from "react";
+import { defaultConfig } from "../../assets/config";
+import { useState } from "react";
 
 const Workout = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const workout = useLiveQuery(() => db.workouts.get(Number(id)));
 
+  const ls = window.localStorage;
+
+  const [currentWorkout, setCurrentWorkout] = useState(
+    ls.getItem("currentWorkout")
+  );
+
+  const isCurrentWorkout = useCallback(
+    () => Number(currentWorkout) === Number(workout?.id),
+    [workout, currentWorkout]
+  );
   const markFavorite = async (value) => {
     try {
       const workoutId = await db.workouts.update(Number(id), {
@@ -20,6 +33,13 @@ const Workout = () => {
     } catch (e) {
       console.log("Error:", e);
     }
+  };
+  const markCurrent = async (value) => {
+    ls.setItem(
+      "currentWorkout",
+      value ? workout?.id : defaultConfig.currentWorkout
+    );
+    setCurrentWorkout(ls.getItem("currentWorkout"));
   };
 
   return (
@@ -47,12 +67,26 @@ const Workout = () => {
           />
         ))}
         <Fab
+          sx={{
+            position: "absolute",
+            bottom: 72,
+            left: 16,
+          }}
+          aria-label="Mark Current"
+          variant="extended"
+          color={isCurrentWorkout() ? "info" : undefined}
+          onClick={() => markCurrent(isCurrentWorkout() ? false : true)}
+        >
+          {isCurrentWorkout() ? <Check sx={{ mr: 1 }} /> : ""}
+          {isCurrentWorkout() ? "Current" : "Mark Current"}
+        </Fab>
+        <Fab
           sx={{ position: "absolute", bottom: 72, right: 16 }}
           aria-label="Mark Favorite"
           // color={workout?.isFavorite ? undefined : "primary"}
           onClick={() => markFavorite(workout?.isFavorite ? false : true)}
         >
-          <Favorite color={workout?.isFavorite ? "primary" : undefined} />
+          <Favorite color={workout?.isFavorite ? "error" : undefined} />
         </Fab>
       </Grid>
     </Grid>

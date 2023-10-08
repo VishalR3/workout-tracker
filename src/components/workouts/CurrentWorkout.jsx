@@ -1,4 +1,6 @@
 import { Card, CardContent, Grid, Typography, styled } from "@mui/material";
+import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "../../db/db";
 
 const CurrentWorkoutCard = styled(Card)(({ theme }) => ({
   borderRadius: "12px",
@@ -6,69 +8,75 @@ const CurrentWorkoutCard = styled(Card)(({ theme }) => ({
   color: theme.palette.secondary.main,
 }));
 
-const CurrentWorkout = () => {
-  const workout = {
-    name: "Push Pull Legs",
-    streak: 5,
-    section: {
-      title: "Push",
-      description:
-        "Push exercises are those where the muscles contract when weight is pushed away from the body (think bench press).",
+const workout = {
+  name: "Push Pull Legs",
+  streak: 5,
+  section: {
+    title: "Push",
+    description:
+      "Push exercises are those where the muscles contract when weight is pushed away from the body (think bench press).",
+  },
+  exercises: [
+    {
+      name: "Bench Press",
+      sets: [
+        {
+          reps: 10,
+          weight: 135,
+        },
+        {
+          reps: 10,
+          weight: 135,
+        },
+        {
+          reps: 10,
+          weight: 135,
+        },
+      ],
     },
-    exercises: [
-      {
-        name: "Bench Press",
-        sets: [
-          {
-            reps: 10,
-            weight: 135,
-          },
-          {
-            reps: 10,
-            weight: 135,
-          },
-          {
-            reps: 10,
-            weight: 135,
-          },
-        ],
-      },
-      {
-        name: "Squat",
-        sets: [
-          {
-            reps: 10,
-            weight: 135,
-          },
-          {
-            reps: 10,
-            weight: 135,
-          },
-          {
-            reps: 10,
-            weight: 135,
-          },
-        ],
-      },
-      {
-        name: "Deadlift",
-        sets: [
-          {
-            reps: 10,
-            weight: 135,
-          },
-          {
-            reps: 10,
-            weight: 135,
-          },
-          {
-            reps: 10,
-            weight: 135,
-          },
-        ],
-      },
-    ],
-  };
+    {
+      name: "Squat",
+      sets: [
+        {
+          reps: 10,
+          weight: 135,
+        },
+        {
+          reps: 10,
+          weight: 135,
+        },
+        {
+          reps: 10,
+          weight: 135,
+        },
+      ],
+    },
+    {
+      name: "Deadlift",
+      sets: [
+        {
+          reps: 10,
+          weight: 135,
+        },
+        {
+          reps: 10,
+          weight: 135,
+        },
+        {
+          reps: 10,
+          weight: 135,
+        },
+      ],
+    },
+  ],
+};
+
+const CurrentWorkout = () => {
+  const currentWorkoutId = window.localStorage.getItem("currentWorkout");
+  const currentWorkout = useLiveQuery(() =>
+    db.workouts.get(Number(currentWorkoutId))
+  );
+
   return (
     <CurrentWorkoutCard elevation={0}>
       <CardContent>
@@ -77,7 +85,7 @@ const CurrentWorkout = () => {
             variant="h3"
             color={(theme) => theme.palette.primary.main}
           >
-            {workout.name}
+            {currentWorkout?.name}
           </Typography>
           <Typography variant="subtitle1">
             {workout.streak} Weeks Streak
