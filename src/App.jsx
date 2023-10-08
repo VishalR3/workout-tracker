@@ -13,6 +13,8 @@ import Muscle from "./pages/muscle/Muscle";
 import AddWorkout from "./pages/addworkout/AddWorkout";
 import Workout from "./pages/workout/Workout";
 import EditWorkout from "./pages/editWorkout/EditWorkout";
+import WorkoutSection from "./pages/workout/section/WorkoutSection";
+import EditWorkoutSection from "./pages/workout/section/edit/EditWorkoutSection";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,14 @@ const router = createBrowserRouter([
       {
         path: "/edit/workout/:id",
         element: <EditWorkout />,
+      },
+      {
+        path: "/workout/:id/:sectionId",
+        element: <WorkoutSection />,
+      },
+      {
+        path: "/workout/:id/:sectionId/edit",
+        element: <EditWorkoutSection />,
       },
     ],
   },

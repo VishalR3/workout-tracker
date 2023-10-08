@@ -12,14 +12,14 @@ const EditWorkout = () => {
   const editWorkoutButton = async (data) => {
     try {
       const workoutId = await db.workouts.update(Number(id), {
-        ...data
-      })
+        ...data,
+      });
       console.log(`Workout with Id: ${workoutId} is Updated`);
     } catch (e) {
       console.log("Error:", e);
     }
     navigate(`/workout/${id}`);
-  }
+  };
   return (
     <Grid container spacing={3} p={2}>
       <Grid item xs={12}>
@@ -29,7 +29,7 @@ const EditWorkout = () => {
         <WorkoutForm workout={workout} submitFunction={editWorkoutButton} />
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
 export default EditWorkout;

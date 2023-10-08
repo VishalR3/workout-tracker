@@ -3,7 +3,7 @@ import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-const WorkoutListItem = ({ workout }) => {
+const WorkoutSectionListItem = ({ section, workoutId, index }) => {
   const navigate = useNavigate();
   return (
     <ListItem
@@ -12,9 +12,9 @@ const WorkoutListItem = ({ workout }) => {
         mb: "6px",
         cursor: "pointer",
       }}
-      onClick={() => navigate(`/workout/${workout.id}`)}
+      onClick={() => navigate(`/workout/${workoutId}/${index + 1}`)}
     >
-      <ListItemText primary={workout.name} />
+      <ListItemText primary={section.name} />
       <ListItemIcon sx={{ justifyContent: "flex-end" }}>
         <NavigateNext color="primary" />
       </ListItemIcon>
@@ -22,8 +22,10 @@ const WorkoutListItem = ({ workout }) => {
   );
 };
 
-WorkoutListItem.propTypes = {
-  workout: PropTypes.object.isRequired,
+WorkoutSectionListItem.propTypes = {
+  section: PropTypes.object.isRequired,
+  workoutId: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
-export default WorkoutListItem;
+export default WorkoutSectionListItem;

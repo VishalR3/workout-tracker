@@ -1,18 +1,16 @@
 import { NavigateNext } from "@mui/icons-material";
 import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import PropTypes from "prop-types";
-// import { useNavigate } from "react-router-dom";
 
-const ExerciseListDetail = ({ exercise }) => {
-  // const navigate = useNavigate();
+const ExerciseListDetail = ({ exercise, handleClick = undefined }) => {
   return (
     <ListItem
       sx={{
         backgroundColor: "#E6E6E6",
         mb: "6px",
-        // cursor: 'pointer',
+        cursor: "pointer",
       }}
-    // onClick={() => navigate(`/muscle/${exercise}`)}
+      onClick={() => handleClick(exercise)}
     >
       <ListItemText primary={exercise} />
       <ListItemIcon sx={{ justifyContent: "flex-end" }}>
@@ -24,6 +22,7 @@ const ExerciseListDetail = ({ exercise }) => {
 
 ExerciseListDetail.propTypes = {
   exercise: PropTypes.object.isRequired,
+  handleClick: PropTypes.func,
 };
 
 export default ExerciseListDetail;

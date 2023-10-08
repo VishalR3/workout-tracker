@@ -1,8 +1,8 @@
 import { Chip, Grid, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import ExerciseListDetail from "../../components/muscle/ExerciseListDetail";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../../db/db";
+import WorkoutSectionListItem from "../../components/workout/WorkoutSectionListItem";
 
 const Workout = () => {
   const { id } = useParams();
@@ -13,16 +13,28 @@ const Workout = () => {
       <Grid item xs={12}>
         <Grid container justifyContent="space-between">
           <Typography variant="h1">{workout?.name}</Typography>
-          <Chip label="Edit" sx={{ px: 1 }} onClick={() => navigate(`/edit/workout/${workout.id}`)} />
+          <Chip
+            label="Edit"
+            sx={{ px: 1 }}
+            onClick={() => navigate(`/edit/workout/${workout?.id}`)}
+          />
         </Grid>
+        <Typography variant="body1" mt={1}>
+          {workout?.description}
+        </Typography>
       </Grid>
-      <Grid item xs={12} >
+      <Grid item xs={12}>
         {workout?.sections.map((section, index) => (
-          <ExerciseListDetail exercise={section.name} key={index} />
+          <WorkoutSectionListItem
+            section={section}
+            workoutId={workout?.id}
+            index={index}
+            key={index}
+          />
         ))}
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
 export default Workout;

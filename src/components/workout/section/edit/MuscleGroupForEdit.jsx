@@ -1,10 +1,8 @@
 import { NavigateNext } from "@mui/icons-material";
 import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
 
-const WorkoutListItem = ({ workout }) => {
-  const navigate = useNavigate();
+const MuscleGroupForEdit = ({ muscleGroup, setMuscleGroupSelected }) => {
   return (
     <ListItem
       sx={{
@@ -12,9 +10,9 @@ const WorkoutListItem = ({ workout }) => {
         mb: "6px",
         cursor: "pointer",
       }}
-      onClick={() => navigate(`/workout/${workout.id}`)}
+      onClick={() => setMuscleGroupSelected(muscleGroup)}
     >
-      <ListItemText primary={workout.name} />
+      <ListItemText primary={muscleGroup} />
       <ListItemIcon sx={{ justifyContent: "flex-end" }}>
         <NavigateNext color="primary" />
       </ListItemIcon>
@@ -22,8 +20,9 @@ const WorkoutListItem = ({ workout }) => {
   );
 };
 
-WorkoutListItem.propTypes = {
-  workout: PropTypes.object.isRequired,
+MuscleGroupForEdit.propTypes = {
+  muscleGroup: PropTypes.object.isRequired,
+  setMuscleGroupSelected: PropTypes.func.isRequired,
 };
 
-export default WorkoutListItem;
+export default MuscleGroupForEdit;
