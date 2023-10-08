@@ -10,7 +10,7 @@ const ExerciseListItem = ({ exercise }) => {
       sx={{
         backgroundColor: "#E6E6E6",
         mb: "6px",
-        cursor: 'pointer',
+        cursor: "pointer",
       }}
       onClick={() => navigate(`/muscle/${exercise}`)}
     >
@@ -23,7 +23,7 @@ const ExerciseListItem = ({ exercise }) => {
 };
 
 ExerciseListItem.propTypes = {
-  exercise: PropTypes.object.isRequired,
+  exercise: PropTypes.string.isRequired,
 };
 
 export default ExerciseListItem;

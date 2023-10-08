@@ -1,6 +1,4 @@
-import { useMemo } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { workerContext } from "./workerContext";
 import Layout from "./Layout/Layout";
 import Exercises from "./pages/exercises/Exercises";
 import Workouts from "./pages/workouts/Workouts";
@@ -70,14 +68,10 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const appWorker = useMemo(() => new Worker("./worker.js"), []);
-
   return (
     <>
       <ThemeProvider theme={theme}>
-        <workerContext.Provider value={appWorker}>
-          <RouterProvider router={router} />
-        </workerContext.Provider>
+        <RouterProvider router={router} />
       </ThemeProvider>
     </>
   );

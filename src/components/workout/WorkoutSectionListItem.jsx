@@ -24,7 +24,7 @@ const WorkoutSectionListItem = ({ section, workoutId, index }) => {
 
 WorkoutSectionListItem.propTypes = {
   section: PropTypes.object.isRequired,
-  workoutId: PropTypes.string.isRequired,
+  workoutId: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
 };
 

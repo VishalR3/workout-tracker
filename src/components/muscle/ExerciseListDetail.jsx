@@ -21,7 +21,7 @@ const ExerciseListDetail = ({ exercise, handleClick = undefined }) => {
 };
 
 ExerciseListDetail.propTypes = {
-  exercise: PropTypes.object.isRequired,
+  exercise: PropTypes.string.isRequired,
   handleClick: PropTypes.func,
 };
 
