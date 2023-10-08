@@ -8,6 +8,8 @@ import MuscleGroupForEdit from "../../../../components/workout/section/edit/Musc
 import { useState } from "react";
 import ExerciseListDetail from "../../../../components/muscle/ExerciseListDetail";
 import { NavigateBefore } from "@mui/icons-material";
+import { useEffect } from "react";
+import EditableExerciseItem from "../../../../components/workout/section/edit/EditableExerciseItem";
 
 const EditWorkoutSection = () => {
   const { id, sectionId } = useParams();
@@ -41,6 +43,11 @@ const EditWorkoutSection = () => {
     navigate(`/workout/${workout?.id}`);
   };
 
+  useEffect(() => {
+    if (workout)
+      setSelectedExercises(workout?.sections[sectionId - 1].exercises || []);
+  }, [workout]);
+
   return (
     <Grid container spacing={3} p={2}>
       <Grid item xs={12}>
@@ -52,9 +59,11 @@ const EditWorkoutSection = () => {
       <Grid item xs={12}>
         <List disablePadding>
           {selectedExercises?.map((exercise, index) => (
-            <ExerciseListDetail
+            <EditableExerciseItem
               exercise={exercise}
-              handleClick={selectExercise}
+              selectedExercises={selectedExercises}
+              setSelectedExercises={setSelectedExercises}
+              index={index}
               key={index}
             />
           ))}
