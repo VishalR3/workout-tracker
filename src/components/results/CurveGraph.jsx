@@ -6,14 +6,14 @@ import { MarkerLine, MarkerCircle } from "@visx/marker";
 import generateDateValue from "@visx/mock-data/lib/generators/genDateValue";
 import { Group } from "@visx/group";
 
-const CurveGraph = ({ height = "150px" }) => {
+const CurveGraph = ({ height = "150px", data }) => {
   const svgRef = useRef(null);
   const [rendered, setRendered] = useState(false);
-  const data = generateDateValue(
-    20,
-    (Math.random() * 5) / (72 * Math.random())
-  ).sort((a, b) => b.date.getTime() - a.date.getTime());
-  const getX = (d) => d.date;
+  // const data = generateDateValue(
+  //   20,
+  //   (Math.random() * 5) / (72 * Math.random())
+  // ).sort((a, b) => b.date.getTime() - a.date.getTime());
+  const getX = (d) => d.timestamp;
   const getY = (d) => d.value;
 
   const xScale = scaleTime({
