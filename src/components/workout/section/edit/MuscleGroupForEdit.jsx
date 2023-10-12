@@ -21,7 +21,7 @@ const MuscleGroupForEdit = ({ muscleGroup, setMuscleGroupSelected }) => {
 };
 
 MuscleGroupForEdit.propTypes = {
-  muscleGroup: PropTypes.object.isRequired,
+  muscleGroup: PropTypes.string.isRequired,
   setMuscleGroupSelected: PropTypes.func.isRequired,
 };
 

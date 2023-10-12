@@ -30,8 +30,8 @@ const EditableExerciseItem = ({
 };
 
 EditableExerciseItem.propTypes = {
-  exercise: PropTypes.object.isRequired,
-  selectedExercises: PropTypes.object.isRequired,
+  exercise: PropTypes.string.isRequired,
+  selectedExercises: PropTypes.array.isRequired,
   setSelectedExercises: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
 };
