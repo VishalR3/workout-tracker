@@ -1,6 +1,5 @@
-import { useLoaderData, useParams } from "react-router-dom";
-import { Box, Button, Chip, Grid, Typography, styled } from "@mui/material";
-import { PlayArrow } from "@mui/icons-material";
+import { Outlet, useLoaderData, useParams } from "react-router-dom";
+import { Box, Chip, Grid, Typography, styled } from "@mui/material";
 
 const MuscleChip = styled(Chip, {
   shouldForwardProp: (prop) => prop !== "type",
@@ -12,15 +11,10 @@ const MuscleChip = styled(Chip, {
   textTransform: "capitalize",
 }));
 
-const GoBtn = styled(Button)({
-  backgroundColor: "#ffb68461",
-  fontWeight: "bold",
-  borderBlockEnd: "3px solid #f4711a",
-});
-
 const ExerciseDetail = () => {
   const { exercise } = useLoaderData();
   const { name } = useParams();
+
   return (
     <Grid container spacing={3} p={2}>
       <Grid item xs={12}>
@@ -58,80 +52,16 @@ const ExerciseDetail = () => {
             <Box
               sx={{
                 mt: 2,
-                mb: 1,
+                mb: -1,
                 width: "100%",
                 height: "0.5px",
                 backgroundColor: "#999",
               }}
             />
           </Grid>
-          <Grid item>
-            <Grid container justifyContent={"space-between"}>
-              <Grid item>
-                <Grid
-                  container
-                  direction="column"
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                >
-                  <Typography variant="h4">LEVEL</Typography>
-                  <Typography
-                    variant="h3"
-                    color={"primary.contrastText"}
-                    textTransform={"uppercase"}
-                  >
-                    {exercise?.difficulty}
-                  </Typography>
-                </Grid>
-              </Grid>
-              <Grid item>
-                <Grid
-                  container
-                  direction="column"
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                >
-                  <Typography variant="h4">EQUIPMENT</Typography>
-                  <Typography
-                    variant="h3"
-                    color={"primary.contrastText"}
-                    textTransform={"uppercase"}
-                  >
-                    {exercise?.equipment}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <GoBtn
-          variant="contained"
-          fullWidth
-          size="large"
-          disableElevation
-          endIcon={<PlayArrow />}
-        >
-          {`Let's Go`}
-        </GoBtn>
-      </Grid>
-      <Grid item xs={12} mt={1}>
-        <Typography variant="h2" fontWeight={500} textTransform={"uppercase"}>
-          Description
-        </Typography>
-        <Box
-          sx={(theme) => ({
-            p: 2,
-            mt: 1.5,
-            backgroundColor: theme.palette.style.neutral,
-            color: theme.palette.style.background,
-            borderInlineStart: `3px solid ${theme.palette.primary.main}`,
-          })}
-        >
-          <Typography variant="body2">{exercise?.description} </Typography>
-        </Box>
-      </Grid>
+      <Outlet />
     </Grid>
   );
 };

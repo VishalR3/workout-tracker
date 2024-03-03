@@ -18,6 +18,8 @@ import { defaultConfig } from "./assets/config";
 import ExerciseDetail from "./components/exercises/exercise/ExerciseDetail";
 import { exerciseLoader } from "./components/exercises/exercise/Loader";
 import { muscleLoader } from "./components/muscle/MuscleLoader";
+import AddWorkoutData from "./pages/addWorkoutData/AddWorkoutData";
+import ExerciseDescription from "./components/exercises/exercise/ExerciseDescription";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +75,18 @@ const router = createBrowserRouter([
         path: "/exercise/:name",
         element: <ExerciseDetail />,
         loader: exerciseLoader,
+        children: [
+          {
+            path: "/exercise/:name",
+            element: <ExerciseDescription />,
+            loader: exerciseLoader,
+          },
+          {
+            path: "/exercise/:name/addWorkoutData",
+            element: <AddWorkoutData />,
+            loader: exerciseLoader,
+          },
+        ],
       },
     ],
   },
