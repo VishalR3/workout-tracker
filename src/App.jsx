@@ -16,7 +16,7 @@ import EditWorkoutSection from "./pages/workout/section/edit/EditWorkoutSection"
 import { useEffect } from "react";
 import { defaultConfig } from "./assets/config";
 import ExerciseDetail from "./components/exercises/exercise/ExerciseDetail";
-import { exerciseLoader } from "./components/exercises/exercise/ExerciseLoader";
+import { exerciseLoader } from "./components/exercises/exercise/Loader";
 
 const router = createBrowserRouter([
   {
