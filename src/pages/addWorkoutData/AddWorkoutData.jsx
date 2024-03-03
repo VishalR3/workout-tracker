@@ -55,7 +55,7 @@ const AddWorkoutData = () => {
       console.log(`Weight with Id: ${id} is added`);
       setReps("");
       setWeight("");
-      logEvent(analytics, "Add Workout Record", {
+      logEvent(analytics, "add_workout_record", {
         exercise_name: exercise?.name,
       });
     } catch (e) {
