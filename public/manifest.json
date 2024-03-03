@@ -38,6 +38,6 @@
   "description": "Get fit & track progress with Gymkhana! Build custom workouts, track your progress, and reach your fitness goals!",
   "name": "GymKhana",
   "short_name": "GK",
-  "start_url": "http://localhost:5173/",
-  "scope": "http://localhost:5173/"
+  "start_url": "https://gym-khana.netlify.app/",
+  "scope": "https://gym-khana.netlify.app/"
 }
