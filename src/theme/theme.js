@@ -5,6 +5,7 @@ const theme = createTheme({
     mode: "light",
     primary: {
       main: "#F9B485",
+      contrastText: "#f4711a",
     },
     secondary: {
       main: "#A3C6C8",
@@ -33,8 +34,18 @@ const theme = createTheme({
       fontWeight: 600,
       lineHeight: 1.214,
     },
+    h4: {
+      fontSize: "0.6rem",
+      fontWeight: 400,
+      lineHeight: 1.214,
+    },
     body1: {
       fontSize: "0.8125rem",
+      fontWeight: "normal",
+      lineHeight: 1.231,
+    },
+    body2: {
+      fontSize: "1rem",
       fontWeight: "normal",
       lineHeight: 1.231,
     },

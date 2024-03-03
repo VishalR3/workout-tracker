@@ -1,8 +1,13 @@
 import { NavigateNext } from "@mui/icons-material";
 import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
-const ExerciseListDetail = ({ exercise, handleClick = undefined }) => {
+const ExerciseListDetail = ({ exercise }) => {
+  const navigate = useNavigate();
+  const handleClick = async () => {
+    navigate(`/exercise/${exercise}`);
+  };
   return (
     <ListItem
       sx={{
@@ -10,7 +15,7 @@ const ExerciseListDetail = ({ exercise, handleClick = undefined }) => {
         mb: "6px",
         cursor: "pointer",
       }}
-      onClick={() => handleClick(exercise)}
+      onClick={handleClick}
     >
       <ListItemText primary={exercise} />
       <ListItemIcon sx={{ justifyContent: "flex-end" }}>

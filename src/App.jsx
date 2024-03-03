@@ -15,6 +15,8 @@ import WorkoutSection from "./pages/workout/section/WorkoutSection";
 import EditWorkoutSection from "./pages/workout/section/edit/EditWorkoutSection";
 import { useEffect } from "react";
 import { defaultConfig } from "./assets/config";
+import ExerciseDetail from "./components/exercises/exercise/ExerciseDetail";
+import { exerciseLoader } from "./components/exercises/exercise/ExerciseLoader";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +66,11 @@ const router = createBrowserRouter([
       {
         path: "/workout/:id/:sectionId/edit",
         element: <EditWorkoutSection />,
+      },
+      {
+        path: "/exercise/:name",
+        element: <ExerciseDetail />,
+        loader: exerciseLoader,
       },
     ],
   },
