@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { defaultConfig } from "./assets/config";
 import ExerciseDetail from "./components/exercises/exercise/ExerciseDetail";
 import { exerciseLoader } from "./components/exercises/exercise/Loader";
+import { muscleLoader } from "./components/muscle/MuscleLoader";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
       {
         path: "/muscle/:name",
         element: <Muscle />,
+        loader: muscleLoader,
       },
       {
         path: "/add/workout",

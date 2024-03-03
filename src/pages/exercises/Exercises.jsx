@@ -1,12 +1,12 @@
 import { Grid, List, Typography } from "@mui/material";
 import MockExercise from "../../components/exercises/MockExercise";
 import ExerciseListItem from "../../components/exercises/ExerciseListItem";
-import exerciseList from "../../assets/content/exerciseList.json";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../../db/db";
 import { useCallback } from "react";
 import moment from "moment";
 import ExerciseCard from "../../components/exercises/ExerciseCard";
+import { MUSCLES } from "../../assets/content/muscles";
 
 const Exercises = () => {
   const currentWorkoutId = window.localStorage.getItem("currentWorkout");
@@ -76,8 +76,8 @@ const Exercises = () => {
             <Typography variant="subtitle1">Show All</Typography>
           </Grid>
           <List disablePadding>
-            {Object.keys(exerciseList).map((exercise, index) => (
-              <ExerciseListItem exercise={exercise} key={index} />
+            {MUSCLES.map((muscle, index) => (
+              <ExerciseListItem exercise={muscle.name} key={index} />
             ))}
           </List>
         </Grid>
