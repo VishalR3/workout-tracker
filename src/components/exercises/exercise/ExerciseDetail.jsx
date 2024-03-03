@@ -43,7 +43,7 @@ const ExerciseDetail = () => {
                 type="main"
               />
               {exercise?.supp_muscles_targeted
-                .split(",")
+                ?.split(",")
                 ?.map((muscle, index) => (
                   <MuscleChip key={index} label={muscle} size="small" />
                 ))}
