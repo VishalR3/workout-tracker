@@ -1,5 +1,6 @@
 import { useLoaderData, useParams } from "react-router-dom";
-import { Box, Chip, Grid, Typography, styled } from "@mui/material";
+import { Box, Button, Chip, Grid, Typography, styled } from "@mui/material";
+import { PlayArrow } from "@mui/icons-material";
 
 const MuscleChip = styled(Chip, {
   shouldForwardProp: (prop) => prop !== "type",
@@ -10,6 +11,12 @@ const MuscleChip = styled(Chip, {
   color: type == "main" ? "#f4711a" : undefined,
   textTransform: "capitalize",
 }));
+
+const GoBtn = styled(Button)({
+  backgroundColor: "#ffb68461",
+  fontWeight: "bold",
+  borderBlockEnd: "3px solid #f4711a",
+});
 
 const ExerciseDetail = () => {
   const { exercise } = useLoaderData();
@@ -99,9 +106,24 @@ const ExerciseDetail = () => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
+        <GoBtn
+          variant="contained"
+          fullWidth
+          size="large"
+          disableElevation
+          endIcon={<PlayArrow />}
+        >
+          {`Let's Go`}
+        </GoBtn>
+      </Grid>
+      <Grid item xs={12} mt={1}>
+        <Typography variant="h2" fontWeight={500} textTransform={"uppercase"}>
+          Description
+        </Typography>
         <Box
           sx={(theme) => ({
             p: 2,
+            mt: 1.5,
             backgroundColor: theme.palette.style.neutral,
             color: theme.palette.style.background,
             borderInlineStart: `3px solid ${theme.palette.primary.main}`,
