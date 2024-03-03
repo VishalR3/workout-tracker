@@ -37,7 +37,7 @@ const theme = createTheme({
     h4: {
       fontSize: "0.6rem",
       fontWeight: 400,
-      lineHeight: 1.214,
+      lineHeight: 1.4,
     },
     body1: {
       fontSize: "0.8125rem",

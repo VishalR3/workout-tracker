@@ -1,6 +1,5 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { Box, Chip, Grid, Typography, styled } from "@mui/material";
-import { titleCase } from "../../../utils";
 
 const MuscleChip = styled(Chip, {
   shouldForwardProp: (prop) => prop !== "type",
@@ -9,6 +8,7 @@ const MuscleChip = styled(Chip, {
   fontWeight: "500",
   backgroundColor: type == "main" ? "#ffb68461" : undefined,
   color: type == "main" ? "#f4711a" : undefined,
+  textTransform: "capitalize",
 }));
 
 const ExerciseDetail = () => {
@@ -38,27 +38,24 @@ const ExerciseDetail = () => {
           <Grid item>
             <Grid container gap={1}>
               <MuscleChip
-                label={titleCase(exercise?.main_muscle)}
+                label={exercise?.main_muscle}
                 size="small"
                 type="main"
               />
               {exercise?.supp_muscles_targeted
                 .split(",")
-                .map((muscle, index) => (
-                  <MuscleChip
-                    key={index}
-                    label={titleCase(muscle)}
-                    size="small"
-                  />
+                ?.map((muscle, index) => (
+                  <MuscleChip key={index} label={muscle} size="small" />
                 ))}
             </Grid>
             <Box
-              sx={(theme) => ({
-                my: 2,
+              sx={{
+                mt: 2,
+                mb: 1,
                 width: "100%",
                 height: "0.5px",
-                backgroundColor: theme.palette.primary.main,
-              })}
+                backgroundColor: "#999",
+              }}
             />
           </Grid>
           <Grid item>
@@ -71,8 +68,12 @@ const ExerciseDetail = () => {
                   alignItems={"center"}
                 >
                   <Typography variant="h4">LEVEL</Typography>
-                  <Typography variant="h3" color={"primary.contrastText"}>
-                    {String(exercise?.difficulty).toUpperCase()}
+                  <Typography
+                    variant="h3"
+                    color={"primary.contrastText"}
+                    textTransform={"uppercase"}
+                  >
+                    {exercise?.difficulty}
                   </Typography>
                 </Grid>
               </Grid>
@@ -84,8 +85,12 @@ const ExerciseDetail = () => {
                   alignItems={"center"}
                 >
                   <Typography variant="h4">EQUIPMENT</Typography>
-                  <Typography variant="h3" color={"primary.contrastText"}>
-                    {String(exercise?.equipment).toUpperCase()}
+                  <Typography
+                    variant="h3"
+                    color={"primary.contrastText"}
+                    textTransform={"uppercase"}
+                  >
+                    {exercise?.equipment}
                   </Typography>
                 </Grid>
               </Grid>
@@ -93,8 +98,21 @@ const ExerciseDetail = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Typography variant="body2">{exercise?.description} </Typography>
+      <Grid item xs={12} mt={1}>
+        <Typography variant="h2" textTransform={"uppercase"}>
+          Description
+        </Typography>
+        <Box
+          sx={(theme) => ({
+            mt: 1.5,
+            p: 2,
+            backgroundColor: theme.palette.style.neutral,
+            color: theme.palette.style.background,
+            borderInlineStart: `3px solid ${theme.palette.primary.main}`,
+          })}
+        >
+          <Typography variant="body2">{exercise?.description} </Typography>
+        </Box>
       </Grid>
     </Grid>
   );
