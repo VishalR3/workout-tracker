@@ -14,6 +14,8 @@ import { useLoaderData, useParams } from "react-router-dom";
 import { number } from "prop-types";
 import { useLiveQuery } from "dexie-react-hooks";
 import moment from "moment";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "../../firebase/config";
 
 const AddWorkoutData = () => {
   const { name } = useParams();
@@ -53,6 +55,9 @@ const AddWorkoutData = () => {
       console.log(`Weight with Id: ${id} is added`);
       setReps("");
       setWeight("");
+      logEvent(analytics, "Add Workout Record", {
+        exercise_name: exercise?.name,
+      });
     } catch (e) {
       console.log("Error:", e);
     }
