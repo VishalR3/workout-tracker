@@ -46,8 +46,8 @@ const theme = createTheme({
     },
     body2: {
       fontSize: "1rem",
-      fontWeight: "normal",
-      lineHeight: 1.231,
+      fontWeight: "500",
+      lineHeight: 1.6,
     },
     subtitle1: {
       fontSize: "0.75rem",

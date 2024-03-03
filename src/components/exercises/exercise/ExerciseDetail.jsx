@@ -98,13 +98,9 @@ const ExerciseDetail = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={12} mt={1}>
-        <Typography variant="h2" textTransform={"uppercase"}>
-          Description
-        </Typography>
+      <Grid item xs={12}>
         <Box
           sx={(theme) => ({
-            mt: 1.5,
             p: 2,
             backgroundColor: theme.palette.style.neutral,
             color: theme.palette.style.background,
