@@ -6,14 +6,16 @@ import {
   Timeline,
 } from "@mui/icons-material";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import {useLayoutEffect, useState } from "react";
-import { Link, Outlet, useLocation,  } from "react-router-dom";
+import { useLayoutEffect, useState } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import track_screen_views from "../firebase/track_screen_views";
 
 const Layout = () => {
   const [value, setValue] = useState(0);
   const location = useLocation();
 
   useLayoutEffect(() => {
+    track_screen_views(location.pathname);
     switch (location.pathname) {
       case "/workouts":
         setValue(1);
