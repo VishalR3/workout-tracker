@@ -1,0 +1,43 @@
+{
+  "theme_color": "#f9b485",
+  "background_color": "#e6e6e6",
+  "icons": [
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "icon512_maskable.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "icon512_rounded.png",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "GK_SC_1.png",
+      "sizes": "373x667",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Exercises"
+    },
+    {
+      "src": "GK_SC_2.png",
+      "sizes": "374x664",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Workouts"
+    }
+  ],
+  "orientation": "any",
+  "display": "standalone",
+  "dir": "auto",
+  "lang": "en-IN",
+  "description": "Get fit & track progress with Gymkhana! Build custom workouts, track your progress, and reach your fitness goals!",
+  "name": "GymKhana",
+  "short_name": "GK",
+  "start_url": "http://localhost:5173/",
+  "scope": "http://localhost:5173/"
+}
