@@ -47,6 +47,9 @@ const Layout = () => {
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
+          sx={{
+            paddingBottom: "env(safe-area-inset-bottom)",
+          }}
         >
           <BottomNavigationAction
             to="/"
