@@ -17,22 +17,40 @@
   ],
   "screenshots": [
     {
-      "src": "GK_SC_1.png",
-      "sizes": "373x667",
-      "type": "image/png",
+      "src": "/screenshots/sc_3.PNG",
+      "sizes": "828*1792",
+      "type": "image/PNG",
+      "form_factor": "narrow",
+      "label": "Workouts"
+    },
+    {
+      "src": "/screenshots/sc_4.PNG",
+      "sizes": "828*1792",
+      "type": "image/PNG",
       "form_factor": "narrow",
       "label": "Exercises"
     },
     {
-      "src": "GK_SC_2.png",
-      "sizes": "373x667",
-      "type": "image/png",
+      "src": "/screenshots/sc_2.PNG",
+      "sizes": "828*1792",
+      "type": "image/PNG",
       "form_factor": "narrow",
-      "label": "Workouts"
+      "label": "Exercise Detail"
+    },
+    {
+      "src": "/screenshots/sc_1.PNG",
+      "sizes": "828*1792",
+      "type": "image/PNG",
+      "form_factor": "narrow",
+      "label": "Exercise Records"
     }
   ],
   "orientation": "any",
   "display": "standalone",
+  "categories": [
+    "fitness",
+    "health"
+  ],
   "dir": "auto",
   "lang": "en-IN",
   "description": "Get fit & track progress with Gymkhana! Build custom workouts, track your progress, and reach your fitness goals!",
