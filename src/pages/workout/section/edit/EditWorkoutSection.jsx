@@ -3,19 +3,22 @@ import { Chip, Grid, List, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../../../../db/db";
-import exerciseList from "../../../../assets/content/exerciseList.json";
 import MuscleGroupForEdit from "../../../../components/workout/section/edit/MuscleGroupForEdit";
 import { useState } from "react";
 import ExerciseListDetail from "../../../../components/muscle/ExerciseListDetail";
 import { NavigateBefore } from "@mui/icons-material";
 import { useEffect } from "react";
 import EditableExerciseItem from "../../../../components/workout/section/edit/EditableExerciseItem";
+import { MUSCLES } from "../../../../assets/content/muscles";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { fireDB } from "../../../../firebase/config";
 
 const EditWorkoutSection = () => {
   const { id, sectionId } = useParams();
   const navigate = useNavigate();
   const [muscleGroupSelected, setMuscleGroupSelected] = useState(false);
   const [selectedExercises, setSelectedExercises] = useState([]);
+  const [exerciseList, setExerciseList] = useState([]);
   const workout = useLiveQuery(() => db.workouts.get(Number(id)));
   const section = useCallback(() => {
     if (workout && sectionId) return workout?.sections[sectionId - 1];
@@ -42,6 +45,27 @@ const EditWorkoutSection = () => {
     }
     navigate(`/workout/${workout?.id}`);
   };
+
+  const exercisesForSelectedMuscleGroup = useCallback(async () => {
+    const exercises = [];
+    if (muscleGroupSelected) {
+      const q = query(
+        collection(fireDB, "Exercises"),
+        where("main_muscle", "==", muscleGroupSelected)
+      );
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        exercises.push({ id: doc.id, ...doc.data() });
+      });
+    }
+    return exercises;
+  }, [muscleGroupSelected]);
+
+  useEffect(() => {
+    exercisesForSelectedMuscleGroup().then((res) => {
+      setExerciseList(res);
+    });
+  }, [muscleGroupSelected]);
 
   useEffect(() => {
     if (workout)
@@ -90,16 +114,16 @@ const EditWorkoutSection = () => {
           </Grid>
           <List disablePadding>
             {!muscleGroupSelected
-              ? Object.keys(exerciseList).map((muscleGroup, index) => (
+              ? MUSCLES?.map((muscleGroup, index) => (
                   <MuscleGroupForEdit
-                    muscleGroup={muscleGroup}
+                    muscleGroup={muscleGroup.name}
                     setMuscleGroupSelected={setMuscleGroupSelected}
                     key={index}
                   />
                 ))
-              : exerciseList[muscleGroupSelected].map((exercise, index) => (
+              : exerciseList?.map((exercise, index) => (
                   <ExerciseListDetail
-                    exercise={exercise}
+                    exercise={exercise.name}
                     handleClick={selectExercise}
                     key={index}
                   />
