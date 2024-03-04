@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { ArrowBackIos } from "@mui/icons-material";
 import {
   Box,
@@ -6,6 +7,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  TextField,
   Typography,
 } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -24,6 +26,7 @@ const AppleInput = ({
   id,
   type,
   showBorder = false,
+  disabled = false,
 }) => {
   return (
     <Grid item>
@@ -45,26 +48,38 @@ const AppleInput = ({
             {label}
           </Typography>
         </Grid>
-        <Grid item flexGrow={1}>
-          <Box
-            component={"input"}
-            id={id}
-            type={type}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            textAlign={"right"}
-            sx={{
-              border: "none",
-              backgroundColor: "transparent",
-              outline: "none",
-              width: "100%",
-              textAlign: "-webkit-right",
-              fontFamily:
-                "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
-              fontWeight: "500",
-              fontSize: "1rem",
-            }}
-          />
+        <Grid item flexGrow={1} textAlign={"right"}>
+          {!disabled ? (
+            <Box
+              component={"input"}
+              id={id}
+              type={type}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              textAlign={"right"}
+              sx={{
+                border: "none",
+                backgroundColor: "transparent",
+                outline: "none",
+                width: "100%",
+                textAlign: "-webkit-right",
+                fontFamily:
+                  "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
+                fontWeight: "500",
+                fontSize: "1rem",
+              }}
+            />
+          ) : (
+            <Typography
+              component={"label"}
+              htmlFor={id}
+              textAlign={"right"}
+              fontSize={"1rem"}
+              fontWeight={"500"}
+            >
+              {value}
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </Grid>
@@ -128,9 +143,6 @@ const AddWorkoutData = () => {
       console.log("Error:", e);
     }
   };
-  useEffect(() => {
-    setDate(moment().format("DD-MM-YYYY"));
-  }, []);
 
   return (
     <>
@@ -159,7 +171,15 @@ const AddWorkoutData = () => {
             setValue={setDate}
             label="Date"
             id="dateInput"
+            type="text"
+            disabled={true}
+          />
+          <input
+            style={{ display: "none" }}
             type="date"
+            id="dateInput"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
           />
           <AppleInput
             value={reps}
