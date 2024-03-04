@@ -2,7 +2,7 @@ import { PlayArrow } from "@mui/icons-material";
 import { Box, Button, Grid, Typography, styled } from "@mui/material";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 
-const GoBtn = styled(Button)({
+export const GoBtn = styled(Button)({
   backgroundColor: "#ffb68461",
   fontWeight: "bold",
   borderBlockEnd: "3px solid #f4711a",
