@@ -58,6 +58,7 @@ const AppleInput = ({
               backgroundColor: "transparent",
               outline: "none",
               width: "100%",
+              textAlign: "-webkit-right",
               fontFamily:
                 "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
               fontWeight: "500",
@@ -127,6 +128,9 @@ const AddWorkoutData = () => {
       console.log("Error:", e);
     }
   };
+  useEffect(() => {
+    setDate(moment().format("DD-MM-YYYY"));
+  }, []);
 
   return (
     <>
