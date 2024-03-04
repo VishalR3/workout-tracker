@@ -30,6 +30,7 @@ const AppleInput = ({
     <Grid item>
       <Grid
         container
+        flexWrap={"nowrap"}
         sx={{
           borderBlock: showBorder ? "1px solid #ccc" : undefined,
           py: 0.75,

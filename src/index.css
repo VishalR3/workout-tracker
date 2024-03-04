@@ -69,5 +69,4 @@ main{
 
 input::-webkit-date-and-time-value {
   text-align: right;
-  padding-right: 0.8rem;
 }
