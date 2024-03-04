@@ -7,10 +7,9 @@ import {
   List,
   ListItem,
   ListItemText,
-  TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { db } from "../../db/db";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { useLiveQuery } from "dexie-react-hooks";
@@ -26,7 +25,6 @@ const AppleInput = ({
   id,
   type,
   showBorder = false,
-  disabled = false,
 }) => {
   return (
     <Grid item>
@@ -49,37 +47,25 @@ const AppleInput = ({
           </Typography>
         </Grid>
         <Grid item flexGrow={1} textAlign={"right"}>
-          {!disabled ? (
-            <Box
-              component={"input"}
-              id={id}
-              type={type}
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              textAlign={"right"}
-              sx={{
-                border: "none",
-                backgroundColor: "transparent",
-                outline: "none",
-                width: "100%",
-                textAlign: "-webkit-right",
-                fontFamily:
-                  "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
-                fontWeight: "500",
-                fontSize: "1rem",
-              }}
-            />
-          ) : (
-            <Typography
-              component={"label"}
-              htmlFor={id}
-              textAlign={"right"}
-              fontSize={"1rem"}
-              fontWeight={"500"}
-            >
-              {value}
-            </Typography>
-          )}
+          <Box
+            component={"input"}
+            id={id}
+            type={type}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            textAlign={"right"}
+            sx={{
+              border: "none",
+              backgroundColor: "transparent",
+              outline: "none",
+              width: "100%",
+              textAlign: "-webkit-right",
+              fontFamily:
+                "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
+              fontWeight: "500",
+              fontSize: "1rem",
+            }}
+          />
         </Grid>
       </Grid>
     </Grid>
@@ -91,7 +77,7 @@ const AddWorkoutData = () => {
   const { exercise } = useLoaderData();
   const [reps, setReps] = useState("");
   const [weight, setWeight] = useState("");
-  const [date, setDate] = useState(moment().format("DD-MM-YYYY"));
+  const [date, setDate] = useState(moment().format("YYYY-MM-DD"));
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -171,15 +157,7 @@ const AddWorkoutData = () => {
             setValue={setDate}
             label="Date"
             id="dateInput"
-            type="text"
-            disabled={true}
-          />
-          <input
-            style={{ display: "none" }}
             type="date"
-            id="dateInput"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
           />
           <AppleInput
             value={reps}

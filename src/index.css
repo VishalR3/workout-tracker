@@ -66,3 +66,7 @@ main{
   scroll-snap-align: start;
   touch-action: pan-x;
 }
+
+input::-webkit-date-and-time-value {
+  text-align: right;
+}
