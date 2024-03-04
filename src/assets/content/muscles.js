@@ -14,7 +14,7 @@ export const MUSCLES = [
   { name: "Abdominal Muscles" },
   { name: "Traps" },
   { name: "Lats" },
-  { name: "Back Extension" },
+  { name: "Back Extensors" },
   { name: "Glutes" },
   { name: "Quadriceps" },
   { name: "Hamstring" },
