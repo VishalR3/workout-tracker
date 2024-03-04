@@ -40,6 +40,7 @@ const AppleInput = ({
             htmlFor={id}
             variant="subtitle1"
             color="#aaa"
+            fontSize={"1rem"}
           >
             {label}
           </Typography>
@@ -60,6 +61,7 @@ const AppleInput = ({
               fontFamily:
                 "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
               fontWeight: "500",
+              fontSize: "1rem",
             }}
           />
         </Grid>
