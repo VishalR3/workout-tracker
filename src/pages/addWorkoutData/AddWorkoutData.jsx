@@ -58,8 +58,7 @@ const AppleInput = ({
               border: "none",
               backgroundColor: "transparent",
               outline: "none",
-              width: "100%",
-              textAlign: "-webkit-right",
+              width: "-webkit-fill-available",
               fontFamily:
                 "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
               fontWeight: "500",
