@@ -1,4 +1,4 @@
-import { Add } from "@mui/icons-material";
+import { Add, ArrowBackIos } from "@mui/icons-material";
 import {
   Button,
   Grid,
@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { db } from "../../db/db";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { number } from "prop-types";
 import { useLiveQuery } from "dexie-react-hooks";
 import moment from "moment";
@@ -22,6 +22,11 @@ const AddWorkoutData = () => {
   const { exercise } = useLoaderData();
   const [reps, setReps] = useState();
   const [weight, setWeight] = useState();
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate("..");
+  };
 
   const workoutRecords = useLiveQuery(async () => {
     const records = await db.workoutHistory
@@ -65,6 +70,15 @@ const AddWorkoutData = () => {
 
   return (
     <>
+      <Grid item xs={12}>
+        <Grid container>
+          <Grid item>
+            <Button startIcon={<ArrowBackIos />} onClick={goBack}>
+              Description
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
       <Grid item xs={12}>
         <Grid container flexWrap={"nowrap"} spacing={1} alignItems={"center"}>
           <Grid item>
