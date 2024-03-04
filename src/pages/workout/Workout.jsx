@@ -69,7 +69,7 @@ const Workout = () => {
         <Fab
           sx={{
             position: "absolute",
-            bottom: 72,
+            bottom: "calc(72px + env(safe-area-inset-bottom))",
             left: 16,
           }}
           aria-label="Mark Current"
@@ -81,7 +81,11 @@ const Workout = () => {
           {isCurrentWorkout() ? "Current" : "Mark Current"}
         </Fab>
         <Fab
-          sx={{ position: "absolute", bottom: 72, right: 16 }}
+          sx={{
+            position: "absolute",
+            bottom: "calc(72px + env(safe-area-inset-bottom))",
+            right: 16,
+          }}
           aria-label="Mark Favorite"
           // color={workout?.isFavorite ? undefined : "primary"}
           onClick={() => markFavorite(workout?.isFavorite ? false : true)}

@@ -57,11 +57,12 @@ main{
 }
 
 .mock-exercise{
-  min-width: 120px;
+  width: 120px;
   min-height: 120px;
   aspect-ratio: 1/1;
   border-radius: 12px;
   background-color: #F9B485;
   scroll-snap-align: start;
-  touch-action: pan-x
+  touch-action: pan-x;
+  word-break: break-word;
 }

@@ -1,5 +1,5 @@
 {
-  "theme_color": "#f9b485",
+  "theme_color": "#f1f1f1",
   "background_color": "#e6e6e6",
   "icons": [
     {
@@ -25,7 +25,7 @@
     },
     {
       "src": "GK_SC_2.png",
-      "sizes": "374x664",
+      "sizes": "373x667",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Workouts"
@@ -37,7 +37,7 @@
   "lang": "en-IN",
   "description": "Get fit & track progress with Gymkhana! Build custom workouts, track your progress, and reach your fitness goals!",
   "name": "GymKhana",
-  "short_name": "GK",
+  "short_name": "GymKhana",
   "start_url": "https://gym-khana.netlify.app/",
   "scope": "https://gym-khana.netlify.app/"
 }
