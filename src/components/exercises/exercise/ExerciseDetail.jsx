@@ -1,5 +1,11 @@
-import { Outlet, useLoaderData, useParams } from "react-router-dom";
-import { Box, Chip, Grid, Typography, styled } from "@mui/material";
+import {
+  Outlet,
+  useLoaderData,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+import { Box, Button, Chip, Grid, Typography, styled } from "@mui/material";
+import { ArrowBackIos } from "@mui/icons-material";
 
 const MuscleChip = styled(Chip, {
   shouldForwardProp: (prop) => prop !== "type",
@@ -14,9 +20,16 @@ const MuscleChip = styled(Chip, {
 const ExerciseDetail = () => {
   const { exercise } = useLoaderData();
   const { name } = useParams();
+  const navigate = useNavigate();
 
   return (
     <Grid container spacing={3} p={2}>
+      {/* A Back Button That Can take users to the previous page */}
+      <Grid item xs={12}>
+        <Button startIcon={<ArrowBackIos />} onClick={() => navigate(-1)}>
+          {exercise?.main_muscle}
+        </Button>
+      </Grid>
       <Grid item xs={12}>
         <iframe
           src={exercise?.video}

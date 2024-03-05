@@ -1,6 +1,8 @@
 import { Grid, List, Typography } from "@mui/material";
-import { useLoaderData, useParams } from "react-router-dom";
+import { Await, useLoaderData, useParams } from "react-router-dom";
 import ExerciseListDetail from "../../components/muscle/ExerciseListDetail";
+import { Suspense } from "react";
+import RowSkeleton from "./RowSkeleton";
 
 const Muscle = () => {
   const { name } = useParams();
@@ -12,11 +14,20 @@ const Muscle = () => {
       </Grid>
       <Grid item xs={12}>
         <Grid container flexDirection={"column"} gap={1}>
-          <List disablePadding>
-            {exercises.map((exercise, index) => (
-              <ExerciseListDetail exercise={exercise.name} key={index} />
-            ))}
-          </List>
+          <Suspense fallback={<RowSkeleton />}>
+            <Await resolve={exercises}>
+              {(resolvedExercises) => (
+                <List disablePadding>
+                  {resolvedExercises?.docs?.map((exercise, index) => (
+                    <ExerciseListDetail
+                      exercise={exercise.data().name}
+                      key={index}
+                    />
+                  ))}
+                </List>
+              )}
+            </Await>
+          </Suspense>
         </Grid>
       </Grid>
     </Grid>

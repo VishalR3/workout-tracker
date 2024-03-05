@@ -81,7 +81,8 @@ const AddWorkoutData = () => {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate("..");
+    // use browser history, and go one step back
+    navigate(-1);
   };
 
   const workoutRecords = useLiveQuery(async () => {

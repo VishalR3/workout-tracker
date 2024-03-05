@@ -18,6 +18,7 @@
     "dexie": "^3.2.4",
     "dexie-react-hooks": "^1.1.6",
     "firebase": "^10.8.1",
+    "framer-motion": "^11.0.8",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
