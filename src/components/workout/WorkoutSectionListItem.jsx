@@ -30,9 +30,9 @@ const WorkoutSectionListItem = ({ section, workoutId, index }) => {
           {section?.name}
         </Typography>
         <Typography fontSize={"0.75rem"} color="#6f6f6f">
-          {section?.exercises.reduce(
+          {section?.exercises?.reduce(
             (acc, exercise, i) =>
-              acc + exercise + (i < section.exercises.length - 1 ? ", " : ""),
+              acc + exercise + (i < section?.exercises?.length - 1 ? ", " : ""),
             ""
           )}
         </Typography>
