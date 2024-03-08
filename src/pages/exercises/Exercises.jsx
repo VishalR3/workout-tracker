@@ -70,16 +70,19 @@ const Exercises = () => {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <Grid container flexDirection={"column"} gap={1}>
-          <Grid container justifyContent="space-between">
-            <Typography variant="h3">Exercises</Typography>
-            <Typography variant="subtitle1">Show All</Typography>
+        <Grid container flexDirection={"column"} spacing={2}>
+          <Grid item>
+            <Grid container justifyContent="space-between">
+              <Typography variant="h3">Exercises</Typography>
+            </Grid>
           </Grid>
-          <List disablePadding>
-            {MUSCLES.map((muscle, index) => (
-              <ExerciseListItem exercise={muscle.name} key={index} />
-            ))}
-          </List>
+          <Grid item>
+            <Grid container direction="column" spacing={2}>
+              {MUSCLES.map((muscle, index) => (
+                <ExerciseListItem exercise={muscle.name} key={index} />
+              ))}
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
