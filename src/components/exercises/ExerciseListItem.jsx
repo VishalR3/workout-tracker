@@ -35,8 +35,13 @@ const ExerciseListItem = ({ exercise }) => {
           <Typography fontSize={"1rem"} fontWeight={"600"}>
             {exercise}
           </Typography>
-          <Typography fontSize={"0.875rem"} color="#979797" fontWeight={"500"}>
-            10 exercises
+          <Typography
+            fontSize={"0.875rem"}
+            color="#979797"
+            fontWeight={"500"}
+            mt={0.5}
+          >
+            {8 + Math.round(Math.random() * 10)} exercises
           </Typography>
         </Grid>
       </Grid>

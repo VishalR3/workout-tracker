@@ -1,4 +1,4 @@
-import { Grid, List, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import MockExercise from "../../components/exercises/MockExercise";
 import ExerciseListItem from "../../components/exercises/ExerciseListItem";
 import { useLiveQuery } from "dexie-react-hooks";

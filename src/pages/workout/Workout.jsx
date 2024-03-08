@@ -53,19 +53,21 @@ const Workout = () => {
             onClick={() => navigate(`/edit/workout/${workout?.id}`)}
           />
         </Grid>
-        <Typography variant="body1" mt={1}>
+        <Typography fontWeight={"500"} color="#9e9e9e" mt={1}>
           {workout?.description}
         </Typography>
       </Grid>
       <Grid item xs={12}>
-        {workout?.sections.map((section, index) => (
-          <WorkoutSectionListItem
-            section={section}
-            workoutId={workout?.id}
-            index={index}
-            key={index}
-          />
-        ))}
+        <Grid container flexDirection={"column"} gap={2}>
+          {workout?.sections.map((section, index) => (
+            <WorkoutSectionListItem
+              section={section}
+              workoutId={workout?.id}
+              index={index}
+              key={index}
+            />
+          ))}
+        </Grid>
         <Fab
           sx={{
             position: "absolute",
