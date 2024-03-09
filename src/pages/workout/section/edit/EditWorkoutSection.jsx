@@ -2,21 +2,20 @@ import { useCallback } from "react";
 import { Chip, Grid, List, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useLiveQuery } from "dexie-react-hooks";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { NavigateBefore } from "@mui/icons-material";
 import { db } from "../../../../db/db";
 import MuscleGroupForEdit from "../../../../components/workout/section/edit/MuscleGroupForEdit";
-import { useState } from "react";
 import ExerciseListDetail from "../../../../components/muscle/ExerciseListDetail";
-import { NavigateBefore } from "@mui/icons-material";
-import { useEffect } from "react";
 import EditableExerciseItem from "../../../../components/workout/section/edit/EditableExerciseItem";
 import { MUSCLES } from "../../../../assets/content/muscles";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import { fireDB } from "../../../../firebase/config";
 
 const EditWorkoutSection = () => {
   const { id, sectionId } = useParams();
   const navigate = useNavigate();
   const [muscleGroupSelected, setMuscleGroupSelected] = useState(false);
+  const exercisesByMuscles = useSelector((state) => state.exercises.muscles);
   const [selectedExercises, setSelectedExercises] = useState([]);
   const [exerciseList, setExerciseList] = useState([]);
   const workout = useLiveQuery(() => db.workouts.get(Number(id)));
@@ -47,16 +46,9 @@ const EditWorkoutSection = () => {
   };
 
   const exercisesForSelectedMuscleGroup = useCallback(async () => {
-    const exercises = [];
+    let exercises = [];
     if (muscleGroupSelected) {
-      const q = query(
-        collection(fireDB, "Exercises"),
-        where("main_muscle", "==", muscleGroupSelected)
-      );
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        exercises.push({ id: doc.id, ...doc.data() });
-      });
+      exercises = exercisesByMuscles[muscleGroupSelected];
     }
     return exercises;
   }, [muscleGroupSelected]);
@@ -94,41 +86,44 @@ const EditWorkoutSection = () => {
         </List>
       </Grid>
       <Grid item xs={12}>
-        <Grid container flexDirection={"column"} gap={1}>
-          <Grid container justifyContent="space-between">
-            {muscleGroupSelected ? (
-              <Chip
-                icon={<NavigateBefore />}
-                color={"primary"}
-                variant="outlined"
-                label={muscleGroupSelected}
-                sx={{ px: 1 }}
-                onClick={() => setMuscleGroupSelected(false)}
-              />
-            ) : (
-              <>
-                <Typography variant="h3">Exercises</Typography>
-                <Typography variant="subtitle1">Show All</Typography>
-              </>
-            )}
+        <Grid container flexDirection={"column"} spacing={2}>
+          <Grid item>
+            <Grid container justifyContent="space-between">
+              {muscleGroupSelected ? (
+                <Chip
+                  icon={<NavigateBefore />}
+                  color={"primary"}
+                  variant="outlined"
+                  label={muscleGroupSelected}
+                  sx={{ px: 1 }}
+                  onClick={() => setMuscleGroupSelected(false)}
+                />
+              ) : (
+                <>
+                  <Typography variant="h3">Exercises</Typography>
+                </>
+              )}
+            </Grid>
           </Grid>
-          <List disablePadding>
-            {!muscleGroupSelected
-              ? MUSCLES?.map((muscleGroup, index) => (
-                  <MuscleGroupForEdit
-                    muscleGroup={muscleGroup.name}
-                    setMuscleGroupSelected={setMuscleGroupSelected}
-                    key={index}
-                  />
-                ))
-              : exerciseList?.map((exercise, index) => (
-                  <ExerciseListDetail
-                    exercise={exercise.name}
-                    handleClick={selectExercise}
-                    key={index}
-                  />
-                ))}
-          </List>
+          <Grid item>
+            <Grid container flexDirection={"column"} spacing={2}>
+              {!muscleGroupSelected
+                ? MUSCLES?.map((muscleGroup, index) => (
+                    <MuscleGroupForEdit
+                      muscleGroup={muscleGroup.name}
+                      setMuscleGroupSelected={setMuscleGroupSelected}
+                      key={index}
+                    />
+                  ))
+                : exerciseList?.map((exercise, index) => (
+                    <ExerciseListDetail
+                      exercise={exercise}
+                      handleClick={selectExercise}
+                      key={index}
+                    />
+                  ))}
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

@@ -1,22 +1,24 @@
 import { NavigateNext } from "@mui/icons-material";
-import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 
 const MuscleGroupForEdit = ({ muscleGroup, setMuscleGroupSelected }) => {
   return (
-    <ListItem
-      sx={{
-        backgroundColor: "#E6E6E6",
-        mb: "6px",
-        cursor: "pointer",
-      }}
-      onClick={() => setMuscleGroupSelected(muscleGroup)}
-    >
-      <ListItemText primary={muscleGroup} />
-      <ListItemIcon sx={{ justifyContent: "flex-end" }}>
+    <Grid item onClick={() => setMuscleGroupSelected(muscleGroup)}>
+      <Grid
+        container
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        sx={{
+          backgroundColor: "#E6E6E6",
+          p: "0.5rem 1rem",
+          cursor: "pointer",
+        }}
+      >
+        <Typography>{muscleGroup}</Typography>
         <NavigateNext color="primary" />
-      </ListItemIcon>
-    </ListItem>
+      </Grid>
+    </Grid>
   );
 };
 
