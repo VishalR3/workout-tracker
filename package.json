@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.1",
+    "@reduxjs/toolkit": "^2.2.1",
     "@visx/visx": "^3.1.2",
     "dexie": "^3.2.4",
     "dexie-react-hooks": "^1.1.6",
@@ -24,6 +25,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
+    "react-redux": "^9.1.0",
     "react-router-dom": "^6.11.2"
   },
   "devDependencies": {

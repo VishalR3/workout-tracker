@@ -1,8 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useEffect } from "react";
+import { ThemeProvider } from "@mui/material";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+
 import Layout from "./Layout/Layout";
 import Exercises from "./pages/exercises/Exercises";
 import Workouts from "./pages/workouts/Workouts";
-import { ThemeProvider } from "@mui/material";
 import theme from "./theme/theme";
 import Results from "./pages/results/Results";
 import Options from "./pages/options/Options";
@@ -13,11 +17,9 @@ import Workout from "./pages/workout/Workout";
 import EditWorkout from "./pages/editWorkout/EditWorkout";
 import WorkoutSection from "./pages/workout/section/WorkoutSection";
 import EditWorkoutSection from "./pages/workout/section/edit/EditWorkoutSection";
-import { useEffect } from "react";
 import { defaultConfig } from "./assets/config";
 import ExerciseDetail from "./components/exercises/exercise/ExerciseDetail";
 import { exerciseLoader } from "./components/exercises/exercise/Loader";
-import { muscleLoader } from "./components/muscle/MuscleLoader";
 import AddWorkoutData from "./pages/addWorkoutData/AddWorkoutData";
 import ExerciseDescription from "./components/exercises/exercise/ExerciseDescription";
 
@@ -49,7 +51,6 @@ const router = createBrowserRouter([
       {
         path: "/muscle/:name",
         element: <Muscle />,
-        loader: muscleLoader,
       },
       {
         path: "/add/workout",
@@ -109,7 +110,9 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
       </ThemeProvider>
     </>
   );

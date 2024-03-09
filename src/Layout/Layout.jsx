@@ -6,13 +6,20 @@ import {
   Timeline,
 } from "@mui/icons-material";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import track_screen_views from "../firebase/track_screen_views";
+import { useDispatch } from "react-redux";
+import { getExercises } from "../store/features/exercises/exercisesSlice";
 
 const Layout = () => {
   const [value, setValue] = useState(0);
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getExercises());
+  }, []);
 
   useLayoutEffect(() => {
     track_screen_views(location.pathname);
@@ -36,7 +43,7 @@ const Layout = () => {
   }, [location]);
 
   return (
-    <div>
+    <div className="layout">
       <main>
         <Outlet />
       </main>

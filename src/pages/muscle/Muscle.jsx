@@ -1,32 +1,69 @@
-import { Grid, List, Typography } from "@mui/material";
-import { Await, useLoaderData, useParams } from "react-router-dom";
+import { Chip, Grid, Typography, styled } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { Suspense, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import ExerciseListDetail from "../../components/muscle/ExerciseListDetail";
-import { Suspense } from "react";
 import RowSkeleton from "./RowSkeleton";
+import EQUIPMENTS from "../../assets/content/equipments";
 
+const EquipmentChip = styled(Chip, {
+  shouldForwardProp: (prop) => prop !== "selected",
+})(({ theme, selected }) => ({
+  fontSize: "0.875rem",
+  fontWeight: "bold",
+  color: selected ? theme.palette.primary.contrastText : undefined,
+  backgroundColor: selected ? "#ffb68461" : undefined,
+  transition: "all 200ms ease-in-out",
+}));
+
+/**
+ * Renders the Muscle component, displaying exercises for a specific muscle group.
+ *
+ * @return {JSX.Element} The rendered Muscle component
+ */
 const Muscle = () => {
   const { name } = useParams();
-  const { exercises } = useLoaderData();
+  const exercises = useSelector((state) => state.exercises.muscles[name]);
+  const [selectedEquipment, setSelectedEquipment] = useState("");
+
+  const filteredExercises = useMemo(() => {
+    if (!selectedEquipment) return exercises;
+    return exercises?.filter(
+      (exercise) =>
+        exercise?.equipment?.toLowerCase() === selectedEquipment?.toLowerCase()
+    );
+  }, [selectedEquipment]);
+
   return (
     <Grid container spacing={3} p={2}>
       <Grid item xs={12}>
         <Typography variant="h1">{name}</Typography>
       </Grid>
       <Grid item xs={12}>
-        <Grid container flexDirection={"column"} gap={1}>
+        <Grid container flexWrap={"nowrap"} spacing={1}>
+          {EQUIPMENTS.map((equipment, index) => (
+            <Grid
+              item
+              key={index}
+              onClick={() => {
+                if (selectedEquipment == equipment) setSelectedEquipment("");
+                else setSelectedEquipment(equipment);
+              }}
+            >
+              <EquipmentChip
+                label={equipment}
+                selected={selectedEquipment === equipment}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Grid>
+      <Grid item xs={12}>
+        <Grid container flexDirection={"column"} spacing={2}>
           <Suspense fallback={<RowSkeleton />}>
-            <Await resolve={exercises}>
-              {(resolvedExercises) => (
-                <List disablePadding>
-                  {resolvedExercises?.docs?.map((exercise, index) => (
-                    <ExerciseListDetail
-                      exercise={exercise.data().name}
-                      key={index}
-                    />
-                  ))}
-                </List>
-              )}
-            </Await>
+            {filteredExercises?.map((exercise, index) => (
+              <ExerciseListDetail exercise={exercise} key={index} />
+            ))}
           </Suspense>
         </Grid>
       </Grid>

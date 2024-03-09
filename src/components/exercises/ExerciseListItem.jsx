@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { Box, Grid, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const ExerciseListItem = ({ exercise }) => {
   const navigate = useNavigate();
   const handleClick = () => navigate(`/muscle/${exercise}`);
+  const exercises = useSelector((state) => state.exercises.muscles[exercise]);
 
   return (
     <Grid item>
@@ -22,9 +24,9 @@ const ExerciseListItem = ({ exercise }) => {
               aspectRatio: "16/9",
               borderRadius: "12px",
               // linear gradient with random angle each time, and a gradient between two off white colors, one almost white and other with different hues
-              background: `linear-gradient(${Math.random() * 360}deg, hsl(${
+              background: `linear-gradient(${
                 Math.random() * 360
-              }deg, 0%, 90%) 0%, hsl(${
+              }deg, hsl(0deg, 0%, 90%) 0%, hsl(${
                 Math.random() * 360
               }deg, 80%, 60%) 100%)`,
             }}
@@ -41,7 +43,7 @@ const ExerciseListItem = ({ exercise }) => {
             fontWeight={"500"}
             mt={0.5}
           >
-            {8 + Math.round(Math.random() * 10)} exercises
+            {exercises?.length ? exercises.length + " exercises" : ""}
           </Typography>
         </Grid>
       </Grid>
