@@ -58,9 +58,12 @@ const ExerciseDetail = () => {
               />
               {exercise?.supp_muscles_targeted
                 ?.split(",")
-                ?.map((muscle, index) => (
-                  <MuscleChip key={index} label={muscle} size="small" />
-                ))}
+                ?.map(
+                  (muscle, index) =>
+                    muscle !== "" && (
+                      <MuscleChip key={index} label={muscle} size="small" />
+                    )
+                )}
             </Grid>
             <Box
               sx={{
