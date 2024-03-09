@@ -1,18 +1,14 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect, useRef } from "react";
 import { LinePath } from "@visx/shape";
 import { curveNatural } from "@visx/curve";
 import { scaleTime, scaleLinear } from "@visx/scale";
 import { MarkerLine, MarkerCircle } from "@visx/marker";
-import generateDateValue from "@visx/mock-data/lib/generators/genDateValue";
 import { Group } from "@visx/group";
 
 const CurveGraph = ({ height = "150px", data }) => {
   const svgRef = useRef(null);
   const [rendered, setRendered] = useState(false);
-  // const data = generateDateValue(
-  //   20,
-  //   (Math.random() * 5) / (72 * Math.random())
-  // ).sort((a, b) => b.date.getTime() - a.date.getTime());
   const getX = (d) => d.timestamp;
   const getY = (d) => d.value;
 

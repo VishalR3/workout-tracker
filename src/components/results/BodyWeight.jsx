@@ -8,7 +8,19 @@ import { useLiveQuery } from "dexie-react-hooks";
 const BodyWeight = () => {
   const [addingMetric, setAddingMetric] = useState(false);
   const [metric, setMetric] = useState("");
-  const weightData = useLiveQuery(() => db.weight.toArray());
+  const weightData = useLiveQuery(async () => {
+    const weight = await db.weight.toArray();
+    // if multiple weights have the same date, only the latest one will be returned
+    const trimmedWeights = {};
+    weight.forEach((w) => {
+      const date = new Date(w.timestamp).toLocaleDateString();
+      trimmedWeights[date] = {
+        ...w,
+        date: date,
+      };
+    });
+    return trimmedWeights;
+  });
 
   const addMetric = async () => {
     try {
@@ -22,7 +34,6 @@ const BodyWeight = () => {
     }
     setAddingMetric(false);
   };
-  console.log(weightData);
 
   return (
     <Grid item xs={12}>
@@ -38,7 +49,7 @@ const BodyWeight = () => {
         </Button>
       </Grid>
       <Grid container mt={2}>
-        {weightData && <CurveGraph data={weightData} />}
+        {weightData && <CurveGraph data={Object.values(weightData)} />}
       </Grid>
       {addingMetric && (
         <Grid container mt={1} spacing={1}>

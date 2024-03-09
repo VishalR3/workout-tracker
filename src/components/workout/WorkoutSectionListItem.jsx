@@ -12,7 +12,7 @@ const WorkoutSectionListItem = ({ section, workoutId, index }) => {
       onClick={handleClick}
       sx={{ border: "1px solid #ccc", p: 2, borderRadius: "0.75rem" }}
     >
-      <Grid container flexDirection={"column"} gap={0.8}>
+      <Grid container flexDirection={"column"} gap={1}>
         <Grid container justifyContent={"space-between"}>
           <Typography
             fontSize={"0.75rem"}
@@ -29,7 +29,7 @@ const WorkoutSectionListItem = ({ section, workoutId, index }) => {
         <Typography fontSize={"1.25rem"} fontWeight={"bold"}>
           {section?.name}
         </Typography>
-        <Typography fontSize={"0.75rem"} color="#6f6f6f">
+        <Typography fontSize={"0.75rem"} color="#6f6f6f" mt={0.5}>
           {section?.exercises?.reduce(
             (acc, exercise, i) =>
               acc + exercise + (i < section?.exercises?.length - 1 ? ", " : ""),

@@ -5,6 +5,7 @@ import { fireDB } from "../../../firebase/config";
 const initialState = {
   exercises: [],
   muscles: {},
+  exercisesForSection: [],
 };
 
 export const exercisesSlice = createSlice({
@@ -17,18 +18,23 @@ export const exercisesSlice = createSlice({
     setExercisesByMuscle: (state, action) => {
       state.muscles = action.payload;
     },
+    setExercisesForSection: (state, action) => {
+      state.exercisesForSection = state.exercises.filter((exercise) =>
+        action.payload.includes(exercise.name)
+      );
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setExercises, setExercisesByMuscle } = exercisesSlice.actions;
+export const { setExercises, setExercisesByMuscle, setExercisesForSection } =
+  exercisesSlice.actions;
 
 export default exercisesSlice.reducer;
 
 // get Exercises from firebase using firestore query and set them as exercises
-export const getExercises = () => async (dispatch, getState) => {
+export const getExercises = () => async (dispatch) => {
   // fetch only if there are no exercises
-  if (getState().exercises.exercises.length) return;
 
   const q = query(collection(fireDB, "Exercises"));
   const querySnapshot = await getDocs(q);

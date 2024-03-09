@@ -9,14 +9,8 @@ const ExerciseListDetail = ({ exercise, handleClick = undefined }) => {
     else navigate(`/exercise/${exercise?.name}`);
   };
   return (
-    <Grid item>
-      <Grid
-        container
-        spacing={1.5}
-        flexWrap={"nowrap"}
-        alignItems={"center"}
-        onClick={handleClickEvent}
-      >
+    <Grid item onClick={handleClickEvent}>
+      <Grid container spacing={1.5} flexWrap={"nowrap"} alignItems={"center"}>
         <Grid item>
           <Box
             sx={{
