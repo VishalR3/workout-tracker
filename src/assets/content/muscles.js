@@ -9,7 +9,7 @@ export const MUSCLES = [
     name: "Biceps",
   },
   { name: "Triceps" },
-  { name: "Forearms and Wrists" },
+  { name: "Forearms" },
   { name: "Chest" },
   { name: "Abdominal Muscles" },
   { name: "Traps" },
