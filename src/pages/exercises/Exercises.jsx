@@ -6,9 +6,10 @@ import { db } from "../../db/db";
 import { useCallback } from "react";
 import moment from "moment";
 import ExerciseCard from "../../components/exercises/ExerciseCard";
-import { MUSCLES } from "../../assets/content/muscles";
+import { useSelector } from "react-redux";
 
 const Exercises = () => {
+  const muscles = useSelector((state) => state.muscles.muscles);
   const currentWorkoutId = window.localStorage.getItem("currentWorkout");
   const currentWorkout = useLiveQuery(() =>
     db.workouts.get(Number(currentWorkoutId))
@@ -78,8 +79,8 @@ const Exercises = () => {
           </Grid>
           <Grid item>
             <Grid container direction="column" spacing={2}>
-              {MUSCLES.map((muscle, index) => (
-                <ExerciseListItem exercise={muscle.name} key={index} />
+              {muscles?.map((muscle, index) => (
+                <ExerciseListItem exercise={muscle} key={index} />
               ))}
             </Grid>
           </Grid>

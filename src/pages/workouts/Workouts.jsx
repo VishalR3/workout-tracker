@@ -1,4 +1,4 @@
-import { Chip, Grid, List, Typography } from "@mui/material";
+import { Chip, Grid, Typography } from "@mui/material";
 import MockExercise from "../../components/exercises/MockExercise";
 import CurrentWorkout from "../../components/workouts/CurrentWorkout";
 import WorkoutListItem from "../../components/workouts/WorkoutListItem";
@@ -40,16 +40,29 @@ const Workouts = () => {
       </Grid>
 
       <Grid item xs={12}>
-        <Grid container flexDirection={"column"} gap={1}>
-          <Grid container justifyContent="space-between" alignItems={"center"}>
-            <Typography variant="h3">Workouts</Typography>
-            <Chip size="small" label="Add Workout" sx={{ px: 1 }} onClick={() => navigate("/add/workout")} />
+        <Grid container flexDirection={"column"} spacing={2}>
+          <Grid item>
+            <Grid
+              container
+              justifyContent="space-between"
+              alignItems={"center"}
+            >
+              <Typography variant="h3">Workouts</Typography>
+              <Chip
+                size="small"
+                label="Add Workout"
+                sx={{ px: 1 }}
+                onClick={() => navigate("/add/workout")}
+              />
+            </Grid>
           </Grid>
-          <List disablePadding>
-            {workouts?.map((workout, index) => (
-              <WorkoutListItem workout={workout} key={index} />
-            ))}
-          </List>
+          <Grid item>
+            <Grid container spacing={2}>
+              {workouts?.map((workout, index) => (
+                <WorkoutListItem workout={workout} key={index} />
+              ))}
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

@@ -11,6 +11,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import track_screen_views from "../firebase/track_screen_views";
 import { useDispatch } from "react-redux";
 import { getExercises } from "../store/features/exercises/exercisesSlice";
+import { getMuscles } from "../store/features/muscles/muscleSlice";
 
 const Layout = () => {
   const [value, setValue] = useState(0);
@@ -18,6 +19,7 @@ const Layout = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getMuscles());
     dispatch(getExercises());
   }, []);
 

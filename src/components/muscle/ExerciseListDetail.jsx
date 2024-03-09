@@ -27,7 +27,7 @@ const ExerciseListDetail = ({ exercise, handleClick = undefined }) => {
               background: `linear-gradient(${exercise?.bgColor}
                 )`,
             }}
-            classname="muscle-photo"
+            className="muscle-photo"
           />
         </Grid>
         <Grid item flexGrow={1}>
@@ -50,7 +50,7 @@ const ExerciseListDetail = ({ exercise, handleClick = undefined }) => {
 };
 
 ExerciseListDetail.propTypes = {
-  exercise: PropTypes.string.isRequired,
+  exercise: PropTypes.object.isRequired,
   handleClick: PropTypes.func,
 };
 

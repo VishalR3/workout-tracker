@@ -10,7 +10,7 @@ const WorkoutSectionListItem = ({ section, workoutId, index }) => {
     <Grid
       item
       onClick={handleClick}
-      sx={{ border: "1px solid black", p: 2, borderRadius: "0.75rem" }}
+      sx={{ border: "1px solid #ccc", p: 2, borderRadius: "0.75rem" }}
     >
       <Grid container flexDirection={"column"} gap={0.8}>
         <Grid container justifyContent={"space-between"}>
