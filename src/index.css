@@ -70,3 +70,7 @@ main{
 input::-webkit-date-and-time-value {
   text-align: right;
 }
+
+.custom-select__menu {
+  z-index: 2 !important;
+}

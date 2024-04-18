@@ -15,15 +15,28 @@ import { useParams } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import { fireDB } from "../../../firebase/config";
 import { useState } from "react";
+import CustomSelect from "../../common/CustomSelect";
 
 const ExerciseForm = () => {
   const { muscleName } = useParams();
-  const { register, handleSubmit } = useForm();
+  const { register, control, handleSubmit } = useForm();
   const [snackBarOpen, setSnackBarOpen] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState("");
   const submitFunction = async (data) => {
+    const exercise = {
+      ...data,
+      main_muscle: data.main_muscle ? data.main_muscle.value : muscleName,
+      supp_muscles_targeted: data.supp_muscles_targeted.reduce(
+        (acc, muscle, index) => {
+          if (index) acc += ", ";
+          acc += muscle.value;
+          return acc;
+        },
+        ""
+      ),
+    };
     try {
-      const docRef = await addDoc(collection(fireDB, "Exercises"), data);
+      const docRef = await addDoc(collection(fireDB, "Exercises"), exercise);
       console.log("Document written with ID: ", docRef.id);
       setSnackBarOpen(true);
       setSnackBarMessage("Exercise Added");
@@ -70,41 +83,29 @@ const ExerciseForm = () => {
             />
           </Grid>
           <Grid item>
-            <FormControl fullWidth>
-              <InputLabel id="main-muscle-targeted">
-                Main Muscle Targeted
-              </InputLabel>
-              <Select
-                labelId="main-muscle-targeted"
-                label="Main Muscle Targeted"
-                {...register("main_muscle")}
-                defaultValue={muscleName}
-              >
-                {MUSCLES.map((muscle, index) => (
-                  <MenuItem key={index} value={muscle.name}>
-                    {muscle.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <CustomSelect
+              options={MUSCLES.map((muscle) => ({
+                value: muscle.name,
+                label: muscle.name,
+              }))}
+              defaultValue={{
+                value: muscleName,
+                label: muscleName,
+              }}
+              name="main_muscle"
+              control={control}
+            />
           </Grid>
           <Grid item>
-            <FormControl fullWidth>
-              <InputLabel id="supplemental-muscle">
-                Supplemental Muscle
-              </InputLabel>
-              <Select
-                labelId="supplemental-muscle"
-                label="Supplemental Muscle"
-                {...register("supp_muscles_targeted")}
-              >
-                {MUSCLES.map((muscle, index) => (
-                  <MenuItem key={index} value={muscle.name}>
-                    {muscle.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <CustomSelect
+              options={MUSCLES.map((muscle) => ({
+                value: muscle.name,
+                label: muscle.name,
+              }))}
+              name="supp_muscles_targeted"
+              control={control}
+              isMulti
+            />
           </Grid>
           <Grid item>
             <FormControl fullWidth>
