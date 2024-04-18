@@ -1,10 +1,11 @@
-import { Chip, Grid, Typography, styled } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { Chip, Grid, Typography, styled, IconButton } from "@mui/material";
+import { useParams, useNavigate } from "react-router-dom";
 import { Suspense, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import ExerciseListDetail from "../../components/muscle/ExerciseListDetail";
 import RowSkeleton from "./RowSkeleton";
 import EQUIPMENTS from "../../assets/content/equipments";
+import { Add } from "@mui/icons-material";
 
 const EquipmentChip = styled(Chip, {
   shouldForwardProp: (prop) => prop !== "selected",
@@ -25,6 +26,7 @@ const Muscle = () => {
   const { name } = useParams();
   const exercises = useSelector((state) => state.exercises.muscles[name]);
   const [selectedEquipment, setSelectedEquipment] = useState("");
+  const navigate = useNavigate();
 
   const filteredExercises = useMemo(() => {
     if (!selectedEquipment) return exercises;
@@ -37,7 +39,20 @@ const Muscle = () => {
   return (
     <Grid container spacing={3} p={2}>
       <Grid item xs={12}>
-        <Typography variant="h1">{name}</Typography>
+        <Grid container justifyContent="space-between" alignContent={"center"}>
+          <Grid item>
+            <Typography variant="h1">{name}</Typography>
+          </Grid>
+          <Grid item>
+            <IconButton
+              color="primary"
+              sx={{ height: "28px" }}
+              onClick={() => navigate(`/add/exercise/${name}`)}
+            >
+              <Add />
+            </IconButton>
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item xs={12}>
         <Grid container flexWrap={"nowrap"} spacing={1}>

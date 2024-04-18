@@ -22,6 +22,7 @@ import ExerciseDetail from "./components/exercises/exercise/ExerciseDetail";
 import { exerciseLoader } from "./components/exercises/exercise/Loader";
 import AddWorkoutData from "./pages/addWorkoutData/AddWorkoutData";
 import ExerciseDescription from "./components/exercises/exercise/ExerciseDescription";
+import AddExercise from "./pages/addExercise/AddExercise";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/muscle/:name",
         element: <Muscle />,
+      },
+      {
+        path: "/add/exercise/:muscleName",
+        element: <AddExercise />,
       },
       {
         path: "/add/workout",
