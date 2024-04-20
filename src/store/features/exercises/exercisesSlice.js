@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { collection, getDocs, query } from "firebase/firestore";
 import { fireDB } from "../../../firebase/config";
+import { db } from "../../../db/db";
 
 const initialState = {
   exercises: [],
@@ -36,17 +37,41 @@ export default exercisesSlice.reducer;
 export const getExercises = () => async (dispatch) => {
   // fetch only if there are no exercises
 
-  const q = query(collection(fireDB, "Exercises"));
-  const querySnapshot = await getDocs(q);
-  const exercises = [];
-  querySnapshot.forEach((doc) => {
-    let bgColor = `${Math.random() * 360}deg, hsl(0deg, 0%, 90%) 0%, hsl(${
-      Math.random() * 360
-    }deg, 80%, 60%) 100%`;
-    exercises.push({ id: doc.id, ...doc.data(), bgColor: bgColor });
-  });
-  dispatch(setExercises(exercises));
+  const exercises = await db.exercises.toArray();
 
+  dispatch(setExercises(exercises));
+  setExercisesForMuscles(exercises, dispatch);
+
+  try {
+    const q = query(collection(fireDB, "Exercises"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      let bgColor = `${Math.random() * 360}deg, hsl(0deg, 0%, 90%) 0%, hsl(${
+        Math.random() * 360
+      }deg, 80%, 60%) 100%`;
+      let exercise = {
+        id: doc.id,
+        exercise_id: doc.id,
+        ...doc.data(),
+        bgColor: bgColor,
+      };
+      if (!db.exercises.get({ exercise_id: exercise.id })) {
+        db.exercises.add({
+          ...exercise,
+          id: undefined,
+        });
+        exercises.push(exercise);
+      }
+    });
+
+    dispatch(setExercises(exercises));
+    setExercisesForMuscles(exercises, dispatch);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const setExercisesForMuscles = (exercises, dispatch) => {
   // separate exercises by exercise.main_muscle and save it in exercises by muscle
   const muscles = {};
   exercises.forEach((exercise) => {

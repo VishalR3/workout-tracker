@@ -189,13 +189,29 @@ const AddWorkoutData = () => {
       {workoutRecords &&
         Object.keys(workoutRecords)?.map((date, index) => (
           <Grid item xs={12} key={index}>
-            <Typography variant="h3" textAlign={"center"}>
-              {date}
+            <Typography
+              sx={(theme) => ({
+                fontSize: "1rem",
+                fontWeight: "500",
+                color: theme.palette.style.paper,
+              })}
+            >
+              {moment(date).format("dddd, D MMM YYYY")}
             </Typography>
-            <List disablePadding sx={{ listStyle: "decimal", pl: 3 }}>
+            <List
+              disablePadding
+              dense
+              sx={{ listStyle: "decimal", pl: 3, mt: 1 }}
+            >
               {workoutRecords[date]?.map((record, i) => (
                 <ListItem key={i} sx={{ display: "list-item" }}>
-                  <ListItemText primary={record.toString} />
+                  <ListItemText
+                    primary={record.toString}
+                    primaryTypographyProps={{
+                      fontSize: "1rem",
+                      fontWeight: "500",
+                    }}
+                  />
                 </ListItem>
               ))}
             </List>
