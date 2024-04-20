@@ -45,7 +45,7 @@ export const getExercises = () => async (dispatch) => {
   try {
     const q = query(collection(fireDB, "Exercises"));
     const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach(async (doc) => {
       let bgColor = `${Math.random() * 360}deg, hsl(0deg, 0%, 90%) 0%, hsl(${
         Math.random() * 360
       }deg, 80%, 60%) 100%`;
@@ -55,7 +55,8 @@ export const getExercises = () => async (dispatch) => {
         ...doc.data(),
         bgColor: bgColor,
       };
-      if (!db.exercises.get({ exercise_id: exercise.id })) {
+      const doesExist = await db.exercises.get({ exercise_id: exercise.id });
+      if (!doesExist) {
         db.exercises.add({
           ...exercise,
           id: undefined,
