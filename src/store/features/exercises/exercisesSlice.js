@@ -37,36 +37,37 @@ export default exercisesSlice.reducer;
 export const getExercises = () => async (dispatch) => {
   // fetch only if there are no exercises
 
-  const exercises = await db.exercises.toArray();
+  // const exercises = await db.exercises.toArray();
 
-  dispatch(setExercises(exercises));
-  setExercisesForMuscles(exercises, dispatch);
-
+  // if (exercises.length > 0) {
+  //   dispatch(setExercises(exercises));
+  //   setExercisesForMuscles(exercises, dispatch);
+  // }
+  let ex = [];
   try {
     const q = query(collection(fireDB, "Exercises"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach(async (doc) => {
+      // const doesExist = await db.exercises.get({
+      //   exercise_id: doc.id,
+      // });
       let bgColor = `${Math.random() * 360}deg, hsl(0deg, 0%, 90%) 0%, hsl(${
         Math.random() * 360
       }deg, 80%, 60%) 100%`;
       let exercise = {
-        id: doc.id,
         exercise_id: doc.id,
         ...doc.data(),
         bgColor: bgColor,
       };
-      const doesExist = await db.exercises.get({ exercise_id: exercise.id });
-      if (!doesExist) {
-        db.exercises.add({
-          ...exercise,
-          id: undefined,
-        });
-        exercises.push(exercise);
-      }
+      // if (!doesExist) {
+      //   db.exercises.add(exercise).then((id) => {
+      //     console.log("Exercise with Id: ", id, " is added ");
+      ex.push({ ...exercise, id: doc.id });
+      //   });
+      // }
     });
-
-    dispatch(setExercises(exercises));
-    setExercisesForMuscles(exercises, dispatch);
+    dispatch(setExercises(ex));
+    setExercisesForMuscles(ex, dispatch);
   } catch (e) {
     console.log(e);
   }

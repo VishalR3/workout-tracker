@@ -2,7 +2,7 @@ import Dexie from "dexie";
 
 export const db = new Dexie("gkDatabase");
 
-db.version(8).stores({
+db.version(9).stores({
   workouts: "++id, name, description, sections, isFavorite",
   weight: "++id, value, timestamp",
   workoutHistory:

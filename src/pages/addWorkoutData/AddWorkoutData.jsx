@@ -86,10 +86,12 @@ const AddWorkoutData = () => {
   };
 
   const workoutRecords = useLiveQuery(async () => {
+    // sort records by date
     const records = await db.workoutHistory
       .where("exercise_id")
       .equals(exercise.id)
-      .toArray();
+      .reverse()
+      .sortBy("date");
     const groupedRecords = {};
     records.forEach((record) => {
       let toString = "";
@@ -99,15 +101,21 @@ const AddWorkoutData = () => {
 
       record.toString = toString;
       // eslint-disable-next-line no-prototype-builtins
-      if (!groupedRecords.hasOwnProperty(record.date))
+      if (!groupedRecords.hasOwnProperty(record.date)) {
         groupedRecords[record.date] = [record];
-      else groupedRecords[record.date].push(record);
+      } else {
+        groupedRecords[record.date].push(record);
+        groupedRecords[record.date].sort((a, b) => {
+          return new Date(a.timestamp) - new Date(b.timestamp);
+        });
+      }
     });
 
     return groupedRecords;
   });
 
   const addData = async () => {
+    if (!reps || !weight) return;
     try {
       const timestamp = new Date();
       const id = await db.workoutHistory.add({
