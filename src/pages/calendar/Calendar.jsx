@@ -1,5 +1,8 @@
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import Section from "../../components/options/Section";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 
 const Calendar = () => {
   return (
@@ -8,9 +11,11 @@ const Calendar = () => {
         <Typography variant="h1">Calendar</Typography>
       </Grid>
       <Grid item xs={12}>
-        <Grid container>
-          <Section height="350px" />
-        </Grid>
+        <Box sx={{ borderRadius: "12px", backgroundColor: "#fff" }}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DateCalendar />
+          </LocalizationProvider>
+        </Box>
       </Grid>
       <Grid item xs={12}>
         <Typography variant="h3">Workout History</Typography>
