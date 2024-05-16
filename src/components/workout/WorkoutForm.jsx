@@ -3,17 +3,17 @@ import {
   Button,
   Chip,
   Grid,
-  MenuItem,
-  Select,
   TextField,
+  ToggleButton,
+  ToggleButtonGroup,
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useEffect } from "react";
 
 const WorkoutForm = ({ workout = false, submitFunction }) => {
-  const { register, setValue, handleSubmit } = useForm();
+  const { register, setValue, control, handleSubmit } = useForm();
   const [noOfSections, setNoOfSections] = useState(0);
   const [isEditForm, setIsEditForm] = useState(false);
 
@@ -70,7 +70,7 @@ const WorkoutForm = ({ workout = false, submitFunction }) => {
               <Grid
                 container
                 key={index}
-                spacing={1}
+                spacing={3}
                 mt={1}
                 flexDirection={"column"}
               >
@@ -98,24 +98,49 @@ const WorkoutForm = ({ workout = false, submitFunction }) => {
                   />
                 </Grid>
                 <Grid item>
-                  <Grid
-                    container
-                    justifyContent="space-between"
-                    alignItems={"center"}
-                  >
-                    <Typography>Preferred Day</Typography>
-                    <Select
-                      defaultValue={"monday"}
-                      {...register(`sections.${index}.preferred_day`)}
-                    >
-                      <MenuItem value="monday">Monday</MenuItem>
-                      <MenuItem value="tuesday">Tuesday</MenuItem>
-                      <MenuItem value="wednesday">Wednesday</MenuItem>
-                      <MenuItem value="thursday">Thursday</MenuItem>
-                      <MenuItem value="friday">Friday</MenuItem>
-                      <MenuItem value="saturday">Saturday</MenuItem>
-                      <MenuItem value="sunday">Sunday</MenuItem>
-                    </Select>
+                  <Grid container flexDirection={"column"} spacing={2}>
+                    <Grid item>
+                      <Typography>Preferred Day</Typography>
+                    </Grid>
+                    <Grid item>
+                      {/* Radio Buttons for each day of the week, so that only one day can be selected. All Day Present in a single row */}
+                      <Controller
+                        name={`sections.${index}.preferred_day`}
+                        control={control}
+                        render={({ field }) => (
+                          <ToggleButtonGroup
+                            color="primary"
+                            {...field}
+                            onChange={(e, val) => {
+                              e.target.value = val;
+                              field.onChange(e);
+                            }}
+                            exclusive
+                            aria-label="preffered-day"
+                            sx={{
+                              width: "100%",
+                              justifyContent: "space-between",
+                              "& .MuiButtonBase-root": {
+                                border: "1px solid rgba(0, 0, 0, 0.12)",
+                                borderRadius: "12px",
+                              },
+                              "& .Mui-selected": {
+                                color: "#ffffff !important",
+                                backgroundColor: "#F9B485 !important",
+                              },
+                            }}
+                          >
+                            <ToggleButton value="monday">M</ToggleButton>
+                            <ToggleButton value="tuesday">T</ToggleButton>
+                            <ToggleButton value="wednesday">W</ToggleButton>
+                            <ToggleButton value="thursday">T</ToggleButton>
+                            <ToggleButton value="friday">F</ToggleButton>
+                            <ToggleButton value="saturday">S</ToggleButton>
+                            <ToggleButton value="sunday">S</ToggleButton>
+                          </ToggleButtonGroup>
+                        )}
+                      />
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
