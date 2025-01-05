@@ -74,3 +74,26 @@ input::-webkit-date-and-time-value {
 .custom-select__menu {
   z-index: 2 !important;
 }
+
+/* Desktop Screen Limiting */
+
+@media screen and (min-width: 500px) {
+  #root{
+    background-color:#A3C6C8;
+    height: 100vh;
+    overflow:hidden;
+  }
+  .layout {
+    max-width: 400px;
+    height: 100%;
+    margin: 0 auto;
+    background-color: #f1f1f1;
+    overflow-y: auto;
+  }
+  .navigation-bar{
+    max-width: 400px;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
